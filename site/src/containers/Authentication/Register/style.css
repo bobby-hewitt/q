@@ -1,0 +1,16 @@
+.signUpFormContainer{
+	max-width:400px;
+}
+
+.avatarPreview{
+	width:100%;
+	height:200px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.rowContainer{
+	display: flex;
+	flex-direction: row;
+flex:1;
+}

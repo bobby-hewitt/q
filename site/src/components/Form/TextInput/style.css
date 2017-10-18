@@ -1,0 +1,7 @@
+.textInput{
+	display: flex;
+	flex:1;
+	height:40px;
+	margin:5px 5px 5px 5px;
+	padding: 0px 10px;
+}

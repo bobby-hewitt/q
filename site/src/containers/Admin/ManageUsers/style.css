@@ -1,0 +1,25 @@
+.userContainer{
+	overflow:hidden;
+	margin:5px;
+	display: inline-block;
+}
+
+.userContainer img{
+	max-width: 200px;
+	max-height:200px;
+}
+
+.adminApprovalButton{
+	margin:5px;
+	background:white;
+	border-radius:3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex:1;
+}
+
+.rowContainer{
+	display: flex;
+	flex-direction: row;
+}

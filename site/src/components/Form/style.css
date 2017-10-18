@@ -1,0 +1,30 @@
+.submitButton{
+	height:40px;
+	display: flex;
+	flex:1;
+	padding: 0 20px;
+	align-items: center;
+	justify-content: center;
+	line-height:50px;
+	background: #f2f2f2;
+	margin:5px 5px 5px 5px;
+}
+
+.formContainer{
+	display: flex;
+	flex-direction: column;
+	flex:1;
+
+}
+
+
+.rowContainer{
+	display: flex;
+	flex-direction: row;
+
+}
+
+.formHeader{
+	font-size: 12px;
+	margin-left:5px;
+}

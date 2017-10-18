@@ -1,0 +1,3 @@
+mongo shell terminal command...
+
+mongo "mongodb://qventures-shard-00-00-yxdxy.mongodb.net:27017,qventures-shard-00-01-yxdxy.mongodb.net:27017,qventures-shard-00-02-yxdxy.mongodb.net:27017/test?replicaSet=qventures-shard-0" --authenticationDatabase admin --ssl --username q-ventures-developer --password Admin
