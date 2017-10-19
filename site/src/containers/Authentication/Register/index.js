@@ -85,7 +85,7 @@ class Register extends Component {
           {this.props.avatarUrl &&
             <div className="avatarPreview" style={{backgroundImage: "url('" + this.props.avatarUrl + "')"}}/>
           }
-          <FileUpload name="file" onUploadImage={this.onUploadImage.bind(this)}/>
+          <FileUpload name="file" filenamePrefix="user" onUploadImage={this.onUploadImage.bind(this)}/>
           <input type="hidden" name="avatarUrl" value={this.props.avatarUrl ? this.props.avatarUrl : null} />
           <input type="hidden" name="password" value={Math.random() * (Math.random() * 10000000000)} />
 

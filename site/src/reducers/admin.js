@@ -10,6 +10,11 @@ export default (state = initialState, action) => {
         ...state,
         users: action.payload
       }
+    case 'SET_INVESTMENTS':
+      return {
+        ...state,
+        investments: action.payload
+      }
     case 'SET_AS_ADMIN':
       return {
         ...state,

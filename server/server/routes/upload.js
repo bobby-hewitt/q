@@ -7,11 +7,11 @@ router.get('/signImageUpload', function (req, res) {
 	let randomString = Math.round(Math.random() * (Math.random() * 10000000000000))
 
 	const s3 = new aws.S3();
-	const fileName = req.query['file-name'];
+	const fileNamePrefix = req.query['file-name'];
 	const fileType = req.query['file-type'];
 	const s3Params = {
 		Bucket: S3BUCKET,
-		Key: 'avatar/' + randomString,
+		Key: fileNamePrefix + '-'  + randomString,
 		Expires: 60,
 		ContentType: fileType,
 		ACL: 'public-read'
@@ -24,7 +24,7 @@ router.get('/signImageUpload', function (req, res) {
     }
     const returnData = {
       signedRequest: data,
-      url: `https://${S3BUCKET}.s3.amazonaws.com/avatar/${randomString}`
+      url: `https://${S3BUCKET}.s3.amazonaws.com/${fileNamePrefix + '-' + randomString}`
     };
     res.write(JSON.stringify(returnData));
     res.end();

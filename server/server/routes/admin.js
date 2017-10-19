@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 const User = require('../models/user')
+const Investment = require('../models/investment')
+const Event = require('../models/Event')
 const email = require('../email')
 const crypto = require('crypto')
-
+const geocode = require('../helpers/geocode')
 router.get('/authenticate', function (req, res, next) {
 	res.send('success')
 })
@@ -16,7 +18,6 @@ router.get('/users', function(req, res, next){
 })
 
 router.post('/approveUser/:id', function(req,res,next){
-		
 	   User.findOne({_id: req.params.id}, function(err, user) {
 	   		let resetToken;
 	   		crypto.randomBytes(20, function(error, buf) {
@@ -45,6 +46,79 @@ router.post('/approveUser/:id', function(req,res,next){
 
 router.post('/rejectUser/:id', function(req,res,next){
 	console.log(req.params)	
+})
+
+router.post('/addInvestment', function(req,res,next){
+	console.log(req.body)
+	Investment.create({
+		title: req.body.investmentTitle,
+		imageUrl: req.body.newInvestmentImageUrl,
+		videoUrl: req.body.investmentVideo
+	}, function (err, investment) {
+		console.log(investment)
+	  if (err) return res.status(400).send('error saving investment');
+	  else return res.status(200).send('success adding investment')
+	})
+})
+
+router.get('/getInvestments', function(req,res,next){
+	Investment.find({}, function(err, users) {
+		res.json(users)
+  	})	
+})
+
+router.post('/addEvent', function(req,res,next){
+	console.log(req.body)
+	geocode(req.body.addressLine1 + ' ' +req.body.postcode).then((result) => {
+		Event.create({
+			name: req.body.eventName,
+			date: req.body.eventDate,
+			time: req.body.eventTime,
+			description: req.body.eventDescription,
+			addressLine1: req.body.addressLine1,
+			addressLine2: req.body.addressLine2,
+			addressLine3: req.body.addressLine3,
+			postcode: req.body.postcode,
+			latlng: result,
+		}, function (err, event) {
+			console.log('EVENT ', event)
+		  if (err) return res.status(400).send('error creating event');
+		  else return res.status(200).send('success adding event')
+		})
+	})
+})
+
+router.post('/deleteEvent', function(req,res,next){
+	console.log(req.body.eventId)
+	Event.find({_id: req.body.eventId}).remove(function(err, result){
+		if (err) { return res.status(500).send('error deleting event')}
+		else {
+			Event.find({}, function(err, events) {
+				if (err) { return res.status(500).send('error getting events after deleting')}
+				res.status(200).send(events)
+		  	})
+		}
+	})
+})
+
+router.get('/editEvent/:id', function(req,res,next){
+	console.log(req.params)
+	Event.findOne({_id: req.params.id}, function(err, result){
+		if (err) { 
+			console.log('error getting event')
+			return res.status(500).send('error finding event')
+		}	else {
+			console.log(result)
+			return res.status(200).json(result)	
+		}
+			
+	})
+})
+
+router.get('/events', function(req,res,next){
+	Event.find({}, function(err, events) {
+		res.json(events)
+  	})
 })
 
  

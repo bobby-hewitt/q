@@ -88,6 +88,174 @@ export const rejectUser = (payload) => {
   }
 }
 
+
+export const submitNewInvestment = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/addInvestment/',
+      type: "POST",
+      data: payload.data,
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+        console.log('investment added successfully')
+      },
+      error: function(err){
+        console.log(err)
+      //   dispatch(push('/login'))
+      //   dispatch({
+      //     type: 'GO_TO_LOGIN',
+      //     payload: '/admin'
+      //   })
+      //   dispatch({
+      //     type: 'SHOW_ERROR',
+      //     payload: 'Please login with a registered Admin user account'
+      //   })
+      }
+    });
+  }
+}
+
+export const getInvestments = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/getInvestments/',
+      type: "GET",
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+        console.log(response)
+        dispatch({
+          type: 'SET_INVESTMENTS',
+          payload: response
+        })
+      },
+      error: function(err){
+        console.log(err)
+      //   dispatch(push('/login'))
+      //   dispatch({
+      //     type: 'GO_TO_LOGIN',
+      //     payload: '/admin'
+      //   })
+      //   dispatch({
+      //     type: 'SHOW_ERROR',
+      //     payload: 'Please login with a registered Admin user account'
+      //   })
+      }
+    });
+  }
+}
+
+export const submitNewEvent = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/addEvent/',
+      type: "POST",
+      data: payload.data,
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+          dispatch(push('/admin/events'))
+               console.log(response)
+      },
+      error: function(err){
+        console.log(err)
+      //   dispatch(push('/login'))
+      //   dispatch({
+      //     type: 'GO_TO_LOGIN',
+      //     payload: '/admin'
+      //   })
+      //   dispatch({
+      //     type: 'SHOW_ERROR',
+      //     payload: 'Please login with a registered Admin user account'
+      //   })
+      }
+    });
+  }
+}
+
+export const getEvents = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/events/',
+      type: "GET",
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+        console.log(response)
+        dispatch({
+          type: 'SET_EVENTS',
+          payload: response
+        })
+      },
+      error: function(err){
+        console.log(err)
+      //   dispatch(push('/login'))
+      //   dispatch({
+      //     type: 'GO_TO_LOGIN',
+      //     payload: '/admin'
+      //   })
+      //   dispatch({
+      //     type: 'SHOW_ERROR',
+      //     payload: 'Please login with a registered Admin user account'
+      //   })
+      }
+    });
+  }
+}
+
+export const deleteEvent = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/deleteEvent/',
+      type: "POST",
+      data: payload.data,
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+       console.log(response)
+      dispatch({
+          type: 'SET_EVENTS',
+          payload: response
+        })
+      },
+      error: function(err){
+        console.log(err)
+      //   dispatch(push('/login'))
+      //   dispatch({
+      //     type: 'GO_TO_LOGIN',
+      //     payload: '/admin'
+      //   })
+      //   dispatch({
+      //     type: 'SHOW_ERROR',
+      //     payload: 'Please login with a registered Admin user account'
+      //   })
+      }
+    });
+  }
+}
+
+export const editEvent = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/editEvent/' + payload.data,
+      type: "GET",
+      data: payload.data,
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+       console.log(response)
+      },
+      error: function(err){
+        console.log(err)
+      //   dispatch(push('/login'))
+      //   dispatch({
+      //     type: 'GO_TO_LOGIN',
+      //     payload: '/admin'
+      //   })
+      //   dispatch({
+      //     type: 'SHOW_ERROR',
+      //     payload: 'Please login with a registered Admin user account'
+      //   })
+      }
+    });
+  }
+}
+
 export const setAsAdmin = () => {
   return dispatch => {
     dispatch({

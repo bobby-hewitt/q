@@ -5,9 +5,11 @@ import authenticate from './authenticate'
 import user from './user'
 import error from './error'
 import admin from './admin'
+import events from './events'
 
 export default combineReducers({
   routing: routerReducer,
+  events,
   user,
   admin,
   setup,

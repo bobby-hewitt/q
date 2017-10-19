@@ -60,6 +60,7 @@ router.post('/authenticateWithJWT', function (req, res, next) {
 
 
 router.post('/passwordResetRequest', function(req, res, next){
+  console.log('recieved reset req')
   async.waterfall([
     function(done) {
       crypto.randomBytes(20, function(err, buf) {

@@ -6,8 +6,12 @@ import './style.css'
 
 class FileUpload extends Component {
 
+
+
 	componentDidMount(){
+		let self = this;
 		document.getElementById(this.props.name).onchange = () => {
+			console.log(self.props)
 		    const files = document.getElementById(this.props.name).files;
 		    const file = files[0];
 		    if(file === null){
@@ -20,7 +24,7 @@ class FileUpload extends Component {
 	getSignedRequest(file){
 		console.log(file)
 		const xhr = new XMLHttpRequest();
-		xhr.open('GET', `${this.props.apiHost}/upload/signImageUpload?file-name=${file.name}&file-type=${file.type}`);
+		xhr.open('GET', `${this.props.apiHost}/upload/signImageUpload?file-name=${this.props.filenamePrefix}&file-type=${file.type}`);
 		xhr.onreadystatechange = () => {
 		if(xhr.readyState === 4){
 		  if(xhr.status === 200){
@@ -56,7 +60,7 @@ class FileUpload extends Component {
 	render(){
 		return(
 			<div>
-			  	<input name={this.props.name} id={this.props.name}type="file" className="fileInput" placeholder={this.props.placeholder} />
+			  	<input name={this.props.name} id={this.props.name} type="file" className="fileInput" placeholder={this.props.placeholder} />
 			  	<input type="hidden" id="avatar-url" name={this.props.name + 'URL'} value="/images/default.png" />
 		  	</div>
 		)

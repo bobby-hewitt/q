@@ -23,13 +23,15 @@ export const register = (payload) => {
 }
 
 export const login = (payload) => {
+  console.log('in this function')
   return(dispatch) => {
     $.post(payload.url + '/user/login', payload.payload, function(response){   
+        console.log('jhas logged in')
         if (window.localStorage){
           console.log('setting new token in local storage')
           window.localStorage.qVenturesAuth = response.token
         }
-      
+        dispatch(push('registration-complete'))
         dispatch({
           type: 'HIDE_ERROR'
         })
@@ -40,6 +42,7 @@ export const login = (payload) => {
         dispatch(push(payload.redirect))
     }) 
     .fail(function(err) {
+      console.log('error logging in')
       dispatch({
         type: 'SHOW_ERROR',
         payload: err.responseJSON.error
@@ -49,7 +52,6 @@ export const login = (payload) => {
 }
 
 export const logout = (payload) => {
-
     if (window.localStorage){    
       window.localStorage.qVenturesAuth = null
     }
@@ -60,7 +62,6 @@ export const logout = (payload) => {
     })
   }
 }
-
 
 export const setAuthToken = (payload) => {
   return(dispatch) => {
@@ -102,9 +103,6 @@ export const authenticateWithJWT = (payload) => {
       });
   }
 }
-
-
-
 
 
 export const passwordResetRequest = (payload) => {

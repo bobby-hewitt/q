@@ -5,7 +5,14 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { jwtAuth } from '../../helpers/auth'
+
+//routes
 import ManageUsers from './ManageUsers'
+import AddInvestment from './AddInvestment'
+import ManageInvestments from './ManageInvestments'
+import AddEvent from './AddEvent'
+import Events from './Events'
+
 import { Route, Link, withRouter } from 'react-router-dom'
 import { setAsAdmin, goToLogin } from '../../actions/admin'
 class Admin extends Component{
@@ -40,9 +47,11 @@ class Admin extends Component{
 				{this.props.isAdmin &&
 					<div className="adminContainer">
 						<h3>Admin</h3>
-
-						 <Route exact path="/admin/manage-users" component={ManageUsers} />
-						
+						<Route exact path="/admin/manage-users" component={ManageUsers} />
+						<Route exact path="/admin/add-event" component={AddEvent} />
+						<Route exact path="/admin/events" component={Events} />
+						<Route exact path="/admin/add-investment" component={AddInvestment} />	
+						<Route exact path="/admin/manage-investments" component={ManageInvestments} />	
 					</div>
 				}
 			</div>

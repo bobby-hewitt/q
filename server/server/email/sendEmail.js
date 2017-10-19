@@ -4,7 +4,7 @@ module.exports = function(html, user, subject){
 	var smtpTransport = nodemailer.createTransport({
         service: "Gmail",
         auth: {
-            user: process.env.EMAIL_ADDR,
+            user: process.env.GMAIL_ADDR,
             pass: process.env.GMAIL_PW
         }
     });
