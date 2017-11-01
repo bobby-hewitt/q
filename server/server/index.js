@@ -13,6 +13,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const indexRoute = require('./routes/index');
+const publicRoute = require('./routes/public');
 const userRoute = require('./routes/user')
 const uploadRoute = require('./routes/upload')
 const bodyParser = require('body-parser')

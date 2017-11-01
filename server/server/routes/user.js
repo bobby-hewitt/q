@@ -38,11 +38,15 @@ router.post('/login', function (req, res, next) {
       return res.status(401).json({ error: 'Invalid credentials.' });
     }
     if (user) {
+      let userToSend = Object.assign({}, user);
+      delete userToSend._doc.salt
+      delete userToSend._doc.hash
+      console.log('USER TO SEND ', userToSend)
       console.log('should log in')
       var token = jwt.sign({ id: user._id, email: user.email}, process.env.PW_SECRET);
       return res
         .status(200)
-        .json({ token });
+        .json({ token, user: userToSend });
     }
   })(req, res, next);
 });

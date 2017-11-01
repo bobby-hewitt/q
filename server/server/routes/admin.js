@@ -68,24 +68,64 @@ router.get('/getInvestments', function(req,res,next){
 })
 
 router.post('/addEvent', function(req,res,next){
-	console.log(req.body)
-	geocode(req.body.addressLine1 + ' ' +req.body.postcode).then((result) => {
-		Event.create({
-			name: req.body.eventName,
-			date: req.body.eventDate,
-			time: req.body.eventTime,
-			description: req.body.eventDescription,
-			addressLine1: req.body.addressLine1,
-			addressLine2: req.body.addressLine2,
-			addressLine3: req.body.addressLine3,
-			postcode: req.body.postcode,
-			latlng: result,
-		}, function (err, event) {
-			console.log('EVENT ', event)
-		  if (err) return res.status(400).send('error creating event');
-		  else return res.status(200).send('success adding event')
+	//event infromation
+	let obj = {
+		name: req.body.name,
+		date: req.body.date,
+		time: req.body.time,
+		description: req.body.description,
+		addressLine1: req.body.addressLine1,
+		addressLine2: req.body.addressLine2,
+		addressLine3: req.body.addressLine3,
+		postcode: req.body.postcode,
+	}
+
+	if (req.body.id && req.body.id.match(/^[0-9a-fA-F]{24}$/)) {
+  		//Update an existing event
+		Event.findOne({_id: req.body.id}, function(err, event) {
+			if (err) return res.status(500).send('could not match object Id.  Have you deleted this event?')
+		
+			geocode(req.body.addressLine1 + ' ' +req.body.postcode)
+			.then((result) => {
+				updateEvent(result)
+			})
+			.catch((err) => {
+				updateEvent(null)
+			})
+
+			function updateEvent(latlng){
+				let keys = Object.keys(obj) 
+				console.log()
+				for (var i = 0; i < keys.length; i++){
+					event[keys[i]] = obj[keys[i]]
+					console.log(obj[keys[i]])
+					console.log(event[keys[i]])
+				}
+				event.latlng = latlng;
+				event.save(function(err) {
+					if(err) return res.status(500).send('error overwriting existing event')
+					return res.status(200).send('success overwriting event')
+				})
+			}
+		})	
+	} else {
+		// Create event if this is a new event
+		geocode(req.body.addressLine1 + ' ' +req.body.postcode)
+		.then((result) => {
+			createEvent(result)
 		})
-	})
+		.catch((err) => {
+			createEvent(null)
+		})
+		function createEvent(latlng){
+			obj.latlng = latlng
+			Event.create(obj, function (err, event) {
+				console.log('EVENT ', event)
+				if (err) return res.status(400).send('error creating event');
+				else return res.status(200).send('success adding event')
+			})
+		}		
+	}
 })
 
 router.post('/deleteEvent', function(req,res,next){
