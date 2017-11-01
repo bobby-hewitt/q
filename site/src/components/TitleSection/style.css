@@ -1,0 +1,12 @@
+.titleSectionContainer{
+	height:100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background:black;
+	color:white;
+}
+
+.titleSectionContainer.centered{
+	align-items: center;
+}

@@ -6,7 +6,7 @@ import './style.css'
 import { getEvents, deleteEvent, editEvent } from '../../../actions/admin'
 import Form from '../../../components/Form'
 import Event from '../../../components/Event'
-
+import SectionHeader from '../SectionHeader'
 
 class Events extends Component {
 
@@ -19,6 +19,7 @@ class Events extends Component {
 	}
 
 	editEvent(event){
+		console.log('editing event')
 		let payload = {
 			jwt: this.props.jwt,
 			url: this.props.apiHost,
@@ -28,6 +29,7 @@ class Events extends Component {
 	}
 
 	deleteEvent(event){
+		console.log('deleting event')
 		let payload = {
 			jwt: this.props.jwt,
 			url: this.props.apiHost,
@@ -35,14 +37,19 @@ class Events extends Component {
 		}
 		this.props.deleteEvent(payload)
 	}
+
+	addEvent(){
+		console.log('calling add event')
+		this.props.addEvent()
+	}
 	
 	render(){
 		return(
 			<div>
-				<h3>Manage e</h3>
+				<SectionHeader section="Events" item="event" addNew={true} action={this.addEvent.bind(this)}/>
 				{this.props.events && this.props.events.map((event, i) => {
 					return(
-						<Event event={event} editEvent={this.editEvent.bind(this)} deleteEvent={this.deleteEvent.bind(this)} key={i} admin={true} />
+						<Event event={event} editEvent={this.editEvent.bind(this)}  deleteEvent={this.deleteEvent.bind(this)} key={i} admin={true} />
 					)
 				})}
 			</div>
@@ -62,7 +69,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
 	getEvents,
 	deleteEvent,
-	editEvent
+	editEvent,
+	addEvent: () => push('/admin/events/add')
 }, dispatch)
 
 

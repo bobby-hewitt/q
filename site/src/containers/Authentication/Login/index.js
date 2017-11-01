@@ -24,7 +24,6 @@ class Login extends Component {
 	}
 
   onSubmit(payload){
-    console.log('loggin in')
     let data = {
       url: this.props.apiHost,
       payload: payload,

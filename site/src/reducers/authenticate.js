@@ -11,9 +11,11 @@ export default (state = initialState, action) => {
         redirectTo: action.payload
       }
     case 'LOGGED_IN':
+      console.log(action.payload)
       return {
         ...state,
-        token: action.payload
+        token: action.payload,
+       
       }
     case 'LOGOUT':
       return {

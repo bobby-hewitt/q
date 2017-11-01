@@ -1,6 +1,9 @@
 
 const initialState = {
-  users: null
+  users: null,
+  investments: null,
+  isAdmin: null,
+  menuItem: null,
 }
 
 export default (state = initialState, action) => {
@@ -19,6 +22,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAdmin: true
+      }
+    case 'ADMIN_MENU_ITEM_CLICK':
+      return {
+        ...state,
+        menuItem: action.payload
       }
     default:
       return state

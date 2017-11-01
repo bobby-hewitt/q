@@ -23,10 +23,11 @@ export const register = (payload) => {
 }
 
 export const login = (payload) => {
-  console.log('in this function')
+  console.log('in user login action')
   return(dispatch) => {
     $.post(payload.url + '/user/login', payload.payload, function(response){   
-        console.log('jhas logged in')
+        console.log('login request recieved response: ')
+        console.log(response)
         if (window.localStorage){
           console.log('setting new token in local storage')
           window.localStorage.qVenturesAuth = response.token
@@ -37,7 +38,11 @@ export const login = (payload) => {
         })
         dispatch({
           type: 'LOGGED_IN',
-          payload: response.token
+          payload: response.token,
+        })
+        dispatch({
+          type:'SET_USER',
+          payload: response.user._doc
         })
         dispatch(push(payload.redirect))
     }) 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import './style.css'
 
 const TextInput = props => (
-  	<input name={props.name} className="textInput" placeholder={props.placeholder} />
+  	<input name={props.name} onChange={props.onChange} value={props.value} className="textInput" placeholder={props.placeholder} />
 )
 
 

@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
 import './style.css'
 
-const Button = ({action, copy, type}) => (
-  <div onClick={action} className="buttonContainer">
-  	<p>{copy}</p>
+const Button = (props) => (
+  <div 
+  	onClick={props.action}
+  	className="buttonContainer"
+  	style={{
+  		width:props.width,
+  		color: props.color,
+  		backgroundColor: props.background
+  	}}>
+  	<p>{props.copy}</p>
   </div>
 );
 

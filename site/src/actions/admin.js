@@ -153,6 +153,9 @@ export const submitNewEvent = (payload) => {
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
           dispatch(push('/admin/events'))
+          dispatch({
+            type: 'REMOVE_EVENT_FROM_STATE'
+          })
                console.log(response)
       },
       error: function(err){
@@ -238,7 +241,12 @@ export const editEvent = (payload) => {
       data: payload.data,
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
-       console.log(response)
+       
+       dispatch({
+          type: 'SET_EVENT',
+          payload: response
+       })
+       dispatch(push('/admin/events/edit'))
       },
       error: function(err){
         console.log(err)
@@ -256,6 +264,15 @@ export const editEvent = (payload) => {
   }
 }
 
+export const editEventInputValue = (payload) => {
+  return dispatch => {
+    dispatch({
+      type: 'EDIT_EVENT_INPUT_VALUE',
+      payload
+    })
+  }
+}
+
 export const setAsAdmin = () => {
   return dispatch => {
     dispatch({
@@ -265,7 +282,6 @@ export const setAsAdmin = () => {
 }
 
 export const goToLogin = () => {
-  console.log('going to login')
   return dispatch => {
     dispatch(push('/login'))
     dispatch({
@@ -274,4 +290,17 @@ export const goToLogin = () => {
     })
   }
 }
+
+
+export const adminMenuItemClick = (item) => {
+  return dispatch => {
+    dispatch({
+      type: 'ADMIN_MENU_ITEM_CLICK',
+      payload: item
+    })
+    dispatch(push('/admin/' + item))
+  }
+}
+
+
 

@@ -8,6 +8,7 @@ import Login from './containers/Authentication/Login'
 import PasswordResetRequest from './containers/Authentication/PasswordResetRequest'
 import ConfirmNewPassword from './containers/Authentication/ConfirmNewPassword'
 import Admin from './containers/Admin'
+import Home from './containers/Unauthenticated/Home'
 import { setAuthToken } from './actions/user'
 
 class Routes extends Component{
@@ -27,6 +28,7 @@ class Routes extends Component{
 
         <main>
           <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/password-reset-request" component={PasswordResetRequest} />
           <Route exact path="/registration-complete" component={RegistrationComplete} />
           <Route exact path="/register" component={Register} />

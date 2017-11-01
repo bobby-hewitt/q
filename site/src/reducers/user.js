@@ -10,6 +10,10 @@ export default (state = initialState, action) => {
         ...state,
         avatarUrl: action.payload
       }
+    case 'SET_USER':
+      return {
+        ...action.payload
+      }
     default:
       return state
   }

@@ -13,8 +13,12 @@ import ManageInvestments from './ManageInvestments'
 import AddEvent from './AddEvent'
 import Events from './Events'
 
+//components
+import AdminMenu from './AdminMenu'
+
 import { Route, Link, withRouter } from 'react-router-dom'
 import { setAsAdmin, goToLogin } from '../../actions/admin'
+
 class Admin extends Component{
 
 	constructor(props){
@@ -46,12 +50,23 @@ class Admin extends Component{
 			<div>
 				{this.props.isAdmin &&
 					<div className="adminContainer">
-						<h3>Admin</h3>
-						<Route exact path="/admin/manage-users" component={ManageUsers} />
-						<Route exact path="/admin/add-event" component={AddEvent} />
-						<Route exact path="/admin/events" component={Events} />
-						<Route exact path="/admin/add-investment" component={AddInvestment} />	
-						<Route exact path="/admin/manage-investments" component={ManageInvestments} />	
+						<div className="contianer-fluid">
+							<div className="row">
+								<div className="col-md-3"  style={{position:"fixed"}}>
+									<AdminMenu />
+								</div>
+								<div className="col-md-9 col-md-offset-3">
+									<h3>Admin</h3>
+									<Route exact path="/admin/manage-users" component={ManageUsers} />
+									<Route exact path="/admin/events/add" component={AddEvent} />
+									<Route exact path="/admin/events/edit" component={AddEvent} />
+									<Route exact path="/admin/events" component={Events} />
+
+									<Route exact path="/admin/add-investment" component={AddInvestment} />	
+									<Route exact path="/admin/manage-investments" component={ManageInvestments} />
+								</div>
+							</div>
+						</div>	
 					</div>
 				}
 			</div>

@@ -72,7 +72,6 @@ class ManageUsers extends Component {
 							<div />
 						)
 					}
-
 				})}
 			</div>
 		)

@@ -1,0 +1,20 @@
+.sectionBoxContainer{
+	position: relative;
+}
+
+.sectionBoxInner{
+	position: absolute;
+	bottom:10px;
+	left:0px;
+	width:210px;
+	height:210px;
+}
+
+.sectionBoxOuter{
+		width:210px;
+	height:210px;
+	position: absolute;
+	bottom:0px;
+	left:10px;
+	border: 1px solid black;
+}

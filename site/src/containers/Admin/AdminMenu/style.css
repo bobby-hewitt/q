@@ -1,0 +1,16 @@
+.adminMenuContainer{
+	width:100%;
+	font-size: 20px;
+	height:100vh;
+	background:#f2f2f2;
+}
+
+.adminMenuContainer h3{
+	margin:0;
+	padding: 20px;
+}
+
+.adminMenuContainer p{
+	margin:0;
+	padding:0;
+}

@@ -1,6 +1,14 @@
 .buttonContainer{
 	padding:5px;
 	background: #f2f2f2;
-	display: inline-block;
+	display: flex;
+	height:50px;
+	align-items: center;
+	justify-content: center;
 	margin-right: 5px;
+}
+
+.buttonContainer p{
+	padding:0;
+	margin:0;
 }
