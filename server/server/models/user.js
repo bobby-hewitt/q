@@ -7,7 +7,8 @@ var User = new Schema({
 	resetPasswordExpires: '',
 	isAdmin: false,
 	isApproved: false,
-	avatarUrl: ''
+	avatarUrl: '',
+	name: ''
 });
  
 // See passport-local-mongoose docs for schema customization options

@@ -11,7 +11,7 @@ let email = require('../email')
 
 /* GET users listing. */
 router.post('/register', function (req, res) {
-  console.log(req.body)
+  console.log('reqBoy',req.body)
   let user = {
     email: req.body.email, 
     avatarUrl: req.body.avatarUrl,
@@ -21,6 +21,8 @@ router.post('/register', function (req, res) {
     if (err) {
       return res.status(400).send({ error: 'Email address in use.' })
     } else {
+      console.log(user)
+      email('awaiting-approval', user)
       console.log('registered user successfully, email: ', req.body.email)
       res.status(200).send({ user: user.id });
     }

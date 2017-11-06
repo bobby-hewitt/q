@@ -12,12 +12,82 @@ router.get('/authenticate', function (req, res, next) {
 })
 
 router.get('/users', function(req, res, next){
- 	User.find({}, function(err, users) {
+ User.find({}, function(err, users) {
 	res.json(users)
   })
 })
 
-router.post('/approveUser/:id', function(req,res,next){
+router.get('/applicants', function(req, res, next){
+ 	User.find({isApproved: {$ne: true}}, function(err, applicants) {
+	res.json(applicants)
+  })
+})
+
+router.get('/members', function(req, res, next){
+ 	User.find({isApproved: true}, function(err, members) {
+	res.json(members)
+  })
+})
+
+router.get('/administrators', function(req, res, next){
+ 	User.find({isAdmin: true}, function(err, administrators) {
+ 		console.log(administrators)
+ 	if (err) return res.status(500).send({error: 'Could not get administrators'})
+ 	else {
+ 		res.json(administrators)
+ 	}
+  })
+})
+
+router.get('/user/:id', function(req, res, next){
+	console.log(req.params.id)
+ 	User.findOne({_id: req.params.id}, function(err, member) {
+		if (err) {
+			res.status(500).send({error: 'Error fetching user'})
+		} else {
+			res.status(200).send(member)
+		}
+  })
+})
+
+router.post('/revokeMembership/:id', function(req,res,next){
+	console.log(req.params)
+	User.findOne({_id: req.params.id}, function(err, user) {
+		user.remove(function(err, result){
+			if (err) return res.status(500).send({error: 'Could not remove user'})
+			else {
+				User.find({isApproved: true}, function (err, members) {
+					if (err){
+						return res.status(500).send('Error searching applicants in db')
+					}
+					res.json(members)
+				})
+			}
+		})
+	})	
+})
+
+router.get('/removeAdminRights/:id', function(req,res,next){
+	   User.findOne({_id: req.params.id}, function(err, user) {
+			user.isAdmin = false;
+			user.save(function(err) {
+				if(err){
+					res.status(500).send({error: 'Error revoking admin rights'})
+				} else {	
+					User.find({isAdmin: true}, function (err, applicants) {
+						if (err) return res.status(500).send({error: 'Could not find admin users'})
+						res.json(applicants)
+					})
+				}
+			})
+    	})
+
+})
+
+
+
+
+router.post('/approveApplicant/:id', function(req,res,next){
 	   User.findOne({_id: req.params.id}, function(err, user) {
 	   		let resetToken;
 	   		crypto.randomBytes(20, function(error, buf) {
@@ -27,16 +97,16 @@ router.post('/approveUser/:id', function(req,res,next){
 			user.resetPasswordExpires = Date.now() + (1000 * 60 * 60 * 24 * 7)
 			user.save(function(err) {
 				if(err){
-					console.log('error setting admin' , err)
+					console.log('error approving application' , err)
+					res.status(500).send({error: 'Error approving applicant'})
 				} else {
 					let emailData = {
 						token,
 						user
 					}
 					email('user-approved', emailData)
-					User.find({}, function (err, users) {
-						console.log(user)
-						res.json(users)
+					User.find({isApproved: {$ne: true}}, function (err, applicants) {
+						res.json(applicants)
 					})
 				}
 			})
@@ -44,27 +114,108 @@ router.post('/approveUser/:id', function(req,res,next){
   	})
 })
 
-router.post('/rejectUser/:id', function(req,res,next){
-	console.log(req.params)	
+router.post('/rejectApplicant/:id', function(req,res,next){
+	User.findOne({_id: req.params.id}, function(err, user) {
+		console.log(user)
+		email('user-rejected', user)
+		user.remove(function(err, result){
+			if (err) console.log(err)
+			else {
+				User.find({isApproved: {$ne: true}}, function (err, applicants) {
+					if (err){
+						return res.status(500).send('Error searching applicants in db')
+					}
+					res.json(applicants)
+				})
+			}
+		})
+	})	
 })
 
+
+
+
+
+
+
 router.post('/addInvestment', function(req,res,next){
-	console.log(req.body)
-	Investment.create({
-		title: req.body.investmentTitle,
-		imageUrl: req.body.newInvestmentImageUrl,
-		videoUrl: req.body.investmentVideo
-	}, function (err, investment) {
-		console.log(investment)
-	  if (err) return res.status(400).send('error saving investment');
-	  else return res.status(200).send('success adding investment')
-	})
+
+	let obj = {
+		title: req.body.title,
+		imageUrl: req.body.imageUrl,
+		videoUrl: req.body.videoUrl,
+	}
+
+	if (req.body.id && req.body.id.match(/^[0-9a-fA-F]{24}$/)) {
+		console.log('ID FOUND')
+		Investment.findOne({_id: req.body.id}, function(err, investment) {
+			if (err) return res.status(500).send('could not match object Id.  Have you deleted this investment?')
+			let keys = Object.keys(obj) 
+			for (var i = 0; i < keys.length; i++){
+				investment[keys[i]] = obj[keys[i]]
+			}
+			investment.save(function(err) {
+				if(err) return res.status(500).send('error overwriting existing investment')
+				return res.status(200).send('success overwriting investment')
+			})
+		})
+	}
+	else {
+		console.log('ID NOT FOUND')
+		Investment.create({
+			title: req.body.title,
+			imageUrl: req.body.imageUrl,
+			videoUrl: req.body.videoUrl
+		}, function (err, investment) {
+		  if (err) return res.status(400).send('error saving investment');
+		  else return res.status(200).send('success adding investment')
+		})
+	}
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.get('/getInvestments', function(req,res,next){
 	Investment.find({}, function(err, users) {
 		res.json(users)
   	})	
+})
+
+router.get('/editInvestment/:id', function(req,res,next){
+	console.log(req.params)
+	Investment.findOne({_id: req.params.id}, function(err, result){
+		if (err) { 
+			console.log('error getting event')
+			return res.status(500).send('error finding event')
+		}	else {
+			console.log(result)
+			return res.status(200).json(result)	
+		}	
+	})
+})
+
+router.post('/deleteInvestment', function(req,res,next){
+	console.log('DELETING INVESTMNET ', req.body.investmentId)
+	Investment.find({_id: req.body.investmentId}).remove(function(err, result){
+		if (err) { return res.status(500).send('error deleting event')}
+		else {
+			Investment.find({}, function(err, investments) {
+				if (err) { return res.status(500).send('error getting events after deleting')}
+				res.status(200).send(investments)
+		  	})
+		}
+	})
 })
 
 router.post('/addEvent', function(req,res,next){
@@ -154,6 +305,8 @@ router.get('/editEvent/:id', function(req,res,next){
 			
 	})
 })
+
+
 
 router.get('/events', function(req,res,next){
 	Event.find({}, function(err, events) {

@@ -90,17 +90,58 @@ passport.use('jwt', new JwtStrategy(options, function(jwt_payload, user, done) {
 }));
 
 
-setBobbyAsAdmin()
+checkUsers()
 
-function setBobbyAsAdmin(){
-   User.findOne({email: 'bobbyhewitt@hotmail.co.uk'}, function(err, user) {
-      user.isAdmin = true;
-      user.save(function(err) {
-        if(err){
-          console.log('error setting admin' , err)
-        } else {
-          console.log('Bobby set as admin', user)
-        }
-      })
+function checkUsers(){
+  User.find({}, function(err, users) {
+    if (users.length > 0) {
+      return
+    } else {
+      console.log('No users found \n Creating new admin user \n username: bobbyhewitt@hotmail.co.uk \n pw: a')
+      createAdminUser()
+    }
   })
 }
+
+
+
+
+function createAdminUser(){
+  let users = [
+    {
+      email: 'bobbystestaddr@gmail.com', 
+      avatarUrl: 'https://q-ventures.s3.amazonaws.com/avatar/4443182179499',
+      name: 'Bobby Hewitt',
+      isApproved: true,
+      isAdmin: true
+    },
+    {
+      email: 'bobbyhewitt@hotmail.co.uk', 
+      avatarUrl: 'https://q-ventures.s3.amazonaws.com/avatar/4443182179499',
+      name: 'Bobby Hewitt',
+      isApproved: true,
+      isAdmin: true
+    },
+  ]
+
+
+  for(var i = 0; i < users.length; i++){
+    registerUser(users[i])
+  }
+
+  function registerUser(user){
+    User.register(new User(user), 'a', function (err, user) {
+      console.log('registering new user')
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('registered user successfully')
+      }
+    });
+  }
+
+}
+
+
+
+
