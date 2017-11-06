@@ -6,6 +6,7 @@
 	align-items: center;
 	padding-left: 20px;
 	cursor: pointer;
+	transition:all 0.5s ease;
 }
 
 .adminMenuButtonContainer.active{

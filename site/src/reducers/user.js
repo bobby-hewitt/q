@@ -10,6 +10,11 @@ export default (state = initialState, action) => {
         ...state,
         avatarUrl: action.payload
       }
+    case 'SET_AS_ADMIN':
+      return {
+        ...state,
+        isAdmin: true
+      }
     case 'SET_USER':
       return {
         ...action.payload

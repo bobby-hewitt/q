@@ -1,17 +1,21 @@
+const blankEvent = {
+  _id: '',
+  name: '',
+  date: '',
+  time: '',
+  description: '',
+  addressLine1: '',
+  addressLine2: '',
+  addressLine3: '',
+  postcode: '',
+  latlng: '',
+}
+
+
 
 const initialState = {
   events: null,
-  event: {
-      name: '',
-      date: '',
-      time: '',
-      description: '',
-      addressLine1: '',
-      addressLine2: '',
-      addressLine3: '',
-      postcode: '',
-      latlng: '',
-  }
+  event: blankEvent
 }
 
 export default (state = initialState, action) => {
@@ -39,18 +43,7 @@ export default (state = initialState, action) => {
       case 'REMOVE_EVENT_FROM_STATE':
       return {
         ...state,
-        event : {
-          name: '',
-          date: '',
-          time: '',
-          description: '',
-          addressLine1: '',
-          addressLine2: '',
-          addressLine3: '',
-          postcode: '',
-          latlng: '',
-        }
-       
+        event : blankEvent
       }
     default:
       return state

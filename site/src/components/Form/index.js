@@ -7,6 +7,10 @@ import $ from 'jquery'
 
 export default class Form extends Component {
 
+  componentWillMount(){
+    console.log(this.props.hasDelete)
+  }
+
   getValues(id){
     let obj = {}
     var form = document.getElementById(id)
@@ -22,8 +26,15 @@ export default class Form extends Component {
       <div>
         <form className="formContainer" id={this.props.formId}>
           {this.props.children}
-          <div className="submitButton" onClick={this.getValues.bind(this, this.props.formId)}>
-            {this.props.submitText}
+          <div className="rowContainer">
+            <div className="formButton" id="submitButton" onClick={this.getValues.bind(this, this.props.formId)}>
+              {this.props.submitText}
+            </div>
+            {this.props.hasDelete &&
+              <div className="formButton" id="deleteButton" onClick={this.props.deleteAction}>
+                delete
+              </div>
+            }
           </div>
         </form>
       </div>

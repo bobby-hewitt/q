@@ -4,14 +4,12 @@ import Button from '../Button'
 
 
 const Event = (props) => (
-  <div>
-    <p>{props.event.name}</p>
-    {props.admin &&
-    	<div className="buttonContainer">
-	    	<Button action={props.editEvent.bind(this, props.event._id)} background={"red"}copy="edit"/>
-	    	<Button action={props.deleteEvent.bind(this, props.event._id)} background={"red"}copy="delete"/>
-    	</div>	
-    }
+  <div className="adminEventContainer" onClick={props.editEvent.bind(this, props.event._id)}>
+    <h4>{props.event.name}</h4>
+    <p>{props.event.date}</p>
+    <p>{props.event.time}</p>
+    <p>{props.event.description}</p>
+
   </div>
 );
 

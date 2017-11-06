@@ -3,11 +3,11 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import './style.css'
-import { submitNewEvent, editEventInputValue } from '../../../actions/admin'
-import { removeEventFromState } from '../../../actions/cleanup'
-import Form from '../../../components/Form'
-import TextInput from '../../../components/Form/TextInput'
-import FileUpload from '../../../components/Form/FileUpload'
+import { submitNewEvent, deleteEvent, editEventInputValue } from '../../../../actions/admin'
+import { removeEventFromState } from '../../../../actions/cleanup'
+import Form from '../../../../components/Form'
+import TextInput from '../../../../components/Form/TextInput'
+import FileUpload from '../../../../components/Form/FileUpload'
 
 class AddEvent extends Component {
 
@@ -30,26 +30,41 @@ class AddEvent extends Component {
 		this.props.editEventInputValue(obj)
 	}
 
+	deleteEvent(event){		
+		let payload = {
+			jwt: this.props.jwt,
+			url: this.props.apiHost,
+			data: {eventId: event}
+		}
+		this.props.deleteEvent(payload)
+	}
+
 	componentWillUnmount(){
 		this.props.removeEventFromState()
 	}
 
 
 	render(){
+
 		let event = this.props.event
+		console.log(event)
 		let name = event.name
 		let time = event.time
 		let description = event.description
 		let addressLine1 = event.addressLine1
 		let addressLine2 = event.addressLine2
-		let addressLine3 = event.addressLine2
+		let addressLine3 = event.addressLine3
 		let postcode = event.postcode
 		let date = event.date
-
 		return(
 			<div>
-				<h3>Add e</h3>
-				<Form submitText="Submit" onSubmit={this.onSubmit.bind(this)} formId="createNewEventForm" name="createNewEventForm">	         
+				<Form 
+					submitText="Submit" 
+					onSubmit={this.onSubmit.bind(this)} 
+					formId="createNewEventForm" 
+					name="createNewEventForm" 
+					hasDelete={this.props.location.pathname.indexOf('edit') > 0}
+					deleteAction={this.deleteEvent.bind(this, event._id)}>	         
 					<TextInput placeholder="Name of event" value={name} label="Event Name" name="name" onChange={this.onChange.bind(this)}/>
 					<TextInput placeholder="Describe the event" value={description} label="Event Name" name="description" onChange={this.onChange.bind(this)}/>
 					<input type="date" name="date"  value={date} onChange={this.onChange.bind(this)}/>
@@ -76,6 +91,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
 	removeEventFromState,
 	editEventInputValue,
+	deleteEvent,
 	submitNewEvent
 }, dispatch)
 

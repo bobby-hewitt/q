@@ -1,93 +1,169 @@
 import $ from 'jquery'
 import { push } from 'react-router-redux'
 
-export const getUsers = (payload) => {
+
+//Manage Applications
+
+export const getApplicants = (payload) => {
   return(dispatch) => {
     console.log('in users action')
     $.ajax({
-      url: payload.url + '/admin/users',
+      url: payload.url + '/admin/applicants',
       type: "GET",
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
-        console.log('RESPONSE', response)
+        console.log('RESPONSE FROM GET APPLICANTS', response)
         dispatch({
-          type: 'GET_USERS',
+          type: 'SET_APPLICANTS',
           payload: response
         })
       },
       error: function(err){
-        console.log('returned an error')
-        dispatch(push('/login'))
-        console.log('ERROR fetching users', err)
-        dispatch({
-          type: 'LOGOUT'
-        })
-        dispatch({
-          type: 'GO_TO_LOGIN',
-          payload: '/admin'
-        })
-        dispatch({
-          type: 'SHOW_ERROR',
-          payload: 'Please login with a registered Admin user account'
-        })
+        console.log('ERROR WITH API CALL', err)
       }
     });
   }
 }
 
-export const approveUser = (payload) => {
+export const getApplicant = (payload) => {
   return(dispatch) => {
     $.ajax({
-      url: payload.url + '/admin/approveUser/' + payload.user,
-      type: "POST",
-      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
-      success: function(response) { 
-        dispatch({
-          type: 'GET_USERS',
-          payload: response
-        })
-      },
-      error: function(err){
-        console.log(err)
-        dispatch(push('/login'))
-        dispatch({
-          type: 'GO_TO_LOGIN',
-          payload: '/admin'
-        })
-        dispatch({
-          type: 'SHOW_ERROR',
-          payload: 'Please login with a registered Admin user account'
-        })
-      }
-    });
-  }
-}
-
-export const rejectUser = (payload) => {
-  return(dispatch) => {
-    $.ajax({
-      url: payload.url + '/admin/rejectUser/' + payload.user,
-      type: "POST",
+      url: payload.url + '/admin/user/' + payload.data,
+      type: "GET",
+      data: payload.data,
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
         console.log(response)
+       dispatch({
+          type: 'SET_APPLICANT',
+          payload: response
+       })
       },
       error: function(err){
-        console.log(err)
-        // dispatch(push('/login'))
-        // dispatch({
-        //   type: 'GO_TO_LOGIN',
-        //   payload: '/admin'
-        // })
-        // dispatch({
-        //   type: 'SHOW_ERROR',
-        //   payload: 'Please login with a registered Admin user account'
-        // })
+        console.log('ERROR WITH API CALL', err)
       }
     });
   }
 }
 
+export const approveApplicant = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/approveApplicant/' + payload.data,
+      type: "POST",
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+        dispatch({
+          type: 'GET_APPLICANTS',
+          payload: response
+        })
+        dispatch(push('/admin/applicants'))
+      },
+      error: function(err){
+        console.log('ERROR WITH API CALL', err)
+        dispatch(push('/login'))
+        dispatch({
+          type: 'GO_TO_LOGIN',
+          payload: '/admin'
+        })
+        dispatch({
+          type: 'SHOW_ERROR',
+          payload: 'Please login with a registered Admin user account'
+        })
+      }
+    });
+  }
+}
+
+export const rejectApplicant = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/rejectApplicant/' + payload.data,
+      type: "POST",
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) {
+        console.log('SUCCESS REMOVING APLICANT', response) 
+         dispatch({
+          type: 'GET_APPLICANTS',
+          payload: response
+        })
+        dispatch(push('/admin/applicants'))
+      },
+      error: function(err){
+        console.log('ERROR REJECTING APPLICANT', err)
+      }
+    });
+  }
+}
+
+//Manage members
+
+export const getMembers = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/members',
+      type: "GET",
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+        console.log('RESPONSE FROM GET MEMBERS', response)
+        dispatch({
+          type: 'SET_MEMBERS',
+          payload: response
+        })
+      },
+      error: function(err){
+        console.log('GET MEMBERS ERR', err)
+      }
+    });
+  }
+}
+
+export const getMember = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/user/' + payload.data,
+      type: "GET",
+      data: payload.data,
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+        console.log(response)
+       dispatch({
+          type: 'SET_MEMBER',
+          payload: response
+       })
+      },
+      error: function(err){
+        console.log('ERROR WITH API CALL', err)
+      }
+    });
+  }
+}
+
+export const revokeMembership = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/revokeMembership/' + payload.data,
+      type: "POST",
+      data: payload.data,
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+        dispatch({
+          type: 'SET_MEMBERS',
+          payload: response
+        })
+        dispatch({
+          type:'REMOVE_MEMBER_FROM_STATE'
+        })
+        dispatch(push('/admin/members'))
+      },
+      error: function(err){
+        console.log('ERROR WITH API CALL', err)
+      }
+    });
+  }
+}
+
+// Manage investments
 
 export const submitNewInvestment = (payload) => {
   return(dispatch) => {
@@ -97,19 +173,13 @@ export const submitNewInvestment = (payload) => {
       data: payload.data,
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
-        console.log('investment added successfully')
+        dispatch({
+          type: 'REMOVE_INVESTMENT_FROM_STATE'
+        })
+        dispatch(push('/admin/investments'))
       },
       error: function(err){
-        console.log(err)
-      //   dispatch(push('/login'))
-      //   dispatch({
-      //     type: 'GO_TO_LOGIN',
-      //     payload: '/admin'
-      //   })
-      //   dispatch({
-      //     type: 'SHOW_ERROR',
-      //     payload: 'Please login with a registered Admin user account'
-      //   })
+        console.log('ERROR WITH API CALL', err)
       }
     });
   }
@@ -129,20 +199,65 @@ export const getInvestments = (payload) => {
         })
       },
       error: function(err){
-        console.log(err)
-      //   dispatch(push('/login'))
-      //   dispatch({
-      //     type: 'GO_TO_LOGIN',
-      //     payload: '/admin'
-      //   })
-      //   dispatch({
-      //     type: 'SHOW_ERROR',
-      //     payload: 'Please login with a registered Admin user account'
-      //   })
+        console.log('ERROR WITH API CALL', err)
       }
     });
   }
 }
+
+export const deleteInvestment = (payload) => {
+  console.log('IN DELETE INVESTMENT ACTION')
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/deleteInvestment/',
+      type: "POST",
+      data: payload.data,
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+      dispatch(push('/admin/investments'))
+      dispatch({
+          type: 'SET_INVESTMENTS',
+          payload: response
+        })
+      },
+      error: function(err){
+        console.log('ERROR WITH API CALL', err)
+      }
+    });
+  }
+}
+
+export const editInvestment = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/editInvestment/' + payload.data,
+      type: "GET",
+      data: payload.data,
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+       dispatch({
+          type: 'SET_INVESTMENT',
+          payload: response
+       })
+       dispatch(push('/admin/investments/edit'))
+      },
+      error: function(err){
+        console.log('ERROR WITH API CALL', err)
+      }
+    });
+  }
+}
+
+export const editInvestmentInputValue = (payload) => {
+  return dispatch => {
+    dispatch({
+      type: 'EDIT_INVESTMENT_INPUT_VALUE',
+      payload
+    })
+  }
+}
+
+//Manage events
 
 export const submitNewEvent = (payload) => {
   return(dispatch) => {
@@ -156,19 +271,9 @@ export const submitNewEvent = (payload) => {
           dispatch({
             type: 'REMOVE_EVENT_FROM_STATE'
           })
-               console.log(response)
       },
       error: function(err){
-        console.log(err)
-      //   dispatch(push('/login'))
-      //   dispatch({
-      //     type: 'GO_TO_LOGIN',
-      //     payload: '/admin'
-      //   })
-      //   dispatch({
-      //     type: 'SHOW_ERROR',
-      //     payload: 'Please login with a registered Admin user account'
-      //   })
+        console.log('ERROR WITH API CALL', err)
       }
     });
   }
@@ -188,22 +293,14 @@ export const getEvents = (payload) => {
         })
       },
       error: function(err){
-        console.log(err)
-      //   dispatch(push('/login'))
-      //   dispatch({
-      //     type: 'GO_TO_LOGIN',
-      //     payload: '/admin'
-      //   })
-      //   dispatch({
-      //     type: 'SHOW_ERROR',
-      //     payload: 'Please login with a registered Admin user account'
-      //   })
+        console.log('ERROR WITH API CALL', err)
       }
     });
   }
 }
 
 export const deleteEvent = (payload) => {
+  console.log('IN DELETE EVENT ACTION')
   return(dispatch) => {
     $.ajax({
       url: payload.url + '/admin/deleteEvent/',
@@ -211,23 +308,14 @@ export const deleteEvent = (payload) => {
       data: payload.data,
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
-       console.log(response)
+      dispatch(push('/admin/events'))
       dispatch({
           type: 'SET_EVENTS',
           payload: response
         })
       },
       error: function(err){
-        console.log(err)
-      //   dispatch(push('/login'))
-      //   dispatch({
-      //     type: 'GO_TO_LOGIN',
-      //     payload: '/admin'
-      //   })
-      //   dispatch({
-      //     type: 'SHOW_ERROR',
-      //     payload: 'Please login with a registered Admin user account'
-      //   })
+        console.log('ERROR WITH API CALL', err)
       }
     });
   }
@@ -241,7 +329,6 @@ export const editEvent = (payload) => {
       data: payload.data,
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
-       
        dispatch({
           type: 'SET_EVENT',
           payload: response
@@ -249,16 +336,49 @@ export const editEvent = (payload) => {
        dispatch(push('/admin/events/edit'))
       },
       error: function(err){
-        console.log(err)
-      //   dispatch(push('/login'))
-      //   dispatch({
-      //     type: 'GO_TO_LOGIN',
-      //     payload: '/admin'
-      //   })
-      //   dispatch({
-      //     type: 'SHOW_ERROR',
-      //     payload: 'Please login with a registered Admin user account'
-      //   })
+        console.log('ERROR WITH API CALL', err)
+      }
+    });
+  }
+}
+
+//Admin
+
+export const getAdministrators = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/administrators',
+      type: "GET",
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+        console.log('RESPONSE FROM GET APPLICANTS', response)
+        dispatch({
+          type: 'SET_ADMINISTRATORS',
+          payload: response
+        })
+      },
+      error: function(err){
+        console.log('ERROR WITH API CALL', err)
+      }
+    });
+  }
+}
+
+export const removeAdminRights = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/removeAdminRights/' + payload.data,
+      type: "GET",
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+        console.log('RESPONSE FROM GET APPLICANTS', response)
+        dispatch({
+          type: 'SET_ADMINISTRATORS',
+          payload: response
+        })
+      },
+      error: function(err){
+        console.log('ERROR WITH API CALL', err)
       }
     });
   }
@@ -290,7 +410,6 @@ export const goToLogin = () => {
     })
   }
 }
-
 
 export const adminMenuItemClick = (item) => {
   return dispatch => {
