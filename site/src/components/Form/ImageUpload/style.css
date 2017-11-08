@@ -1,6 +1,4 @@
-.fileInput{
-	display: none;
-}
+
 
 .fileUploadContainer{
 	display: flex;
@@ -19,24 +17,24 @@
 	align-items: center;
 }
 
-.uploadButton{
-	width:50px;
-	font-family: FontAwesome;
-	content: "\f093";
+.uploadImageButton{
+	width:200px;
 	background: #242424;
 	color:#d8d8d8;
 	height:50px;
-	margin:5px;
+	margin-top:10px;
 	font-size: 20px;
-	
+	display: flex;
+	justify-content: center;
 	align-items: center;
 }
 
-.uploadButton::after{
-		font-family: FontAwesome;
-	content: "\f093";
-display: flex;
-align-items: center;
-justify-content: center;
-line-height: 50px;
+
+
+.uploadImageContainer{
+	margin-top:50px;
+	height:200px;
+	width:200px;
+	background-position: center;
+	background-size: cover;
 }

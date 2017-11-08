@@ -234,7 +234,8 @@ export const editInvestment = (payload) => {
       type: "GET",
       data: payload.data,
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
-      success: function(response) { 
+      success: function(response) {
+      console.log(response) 
        dispatch({
           type: 'SET_INVESTMENT',
           payload: response
@@ -252,6 +253,15 @@ export const editInvestmentInputValue = (payload) => {
   return dispatch => {
     dispatch({
       type: 'EDIT_INVESTMENT_INPUT_VALUE',
+      payload
+    })
+  }
+}
+
+export const editInvestmentUpdateInputValue = (payload) => {
+  return dispatch => {
+    dispatch({
+      type: 'EDIT_INVESTMENT_UPDATE_INPUT_VALUE',
       payload
     })
   }
@@ -388,6 +398,24 @@ export const editEventInputValue = (payload) => {
   return dispatch => {
     dispatch({
       type: 'EDIT_EVENT_INPUT_VALUE',
+      payload
+    })
+  }
+}
+
+export const addInvestmentFile = (payload) => {
+  return dispatch => {
+    dispatch({
+      type: 'ADD_INVESTMENT_FILE',
+      payload
+    })
+  }
+}
+
+export const deleteInvestmentFile = (payload) => {
+  return dispatch => {
+    dispatch({
+      type: 'DELETE_INVESTMENT_FILE',
       payload
     })
   }

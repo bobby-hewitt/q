@@ -3,6 +3,24 @@ const blankInvestment = {
   title: '',
   imageUrl: '',
   videoUrl: '',
+  files: [],
+  updates: [{
+    timestamp: 11111,
+    copy: 'asdsadasdsa'
+  },{
+    timestamp: 11111,
+    copy: 'asdsadasdsa'
+  }],
+  financeTarget: '',
+  financePreMoneyVal: '',
+  financeRevenue: '',
+  financeComittedFunds: '',
+  financeMinimumInvestment: '',
+  description: '',
+  feature1: '',
+  feature2: '',
+  feature3: '',
+  newUpdate: '',
 }
 
 const initialState = {
@@ -29,7 +47,38 @@ export default (state = initialState, action) => {
           ...state.investment,
           [action.payload.target]: action.payload.value
         }
-       
+      }
+    case 'EDIT_INVESTMENT_UPDATE_INPUT_VALUE':
+      let newUpdates = Object.assign([], state.investment.updates)
+      newUpdates[action.payload.index].copy = action.payload.value
+      return {
+        ...state,
+        investment: {
+          ...state.investment,
+          updates: newUpdates
+        }
+      }
+    case 'ADD_INVESTMENT_FILE':
+      let newFiles = Object.assign([], state.investment.files)
+      newFiles.push(action.payload)
+      return {
+        ...state,
+        investment: {
+          ...state.investment,
+          files: newFiles,
+        }
+      }
+    case 'DELETE_INVESTMENT_FILE':
+      let newFiles2 = Object.assign([], state.investment.files)
+      console.log(action.payload)
+      console.log(newFiles2)
+      newFiles2.splice(action.payload, 1)
+      return {
+        ...state,
+        investment: {
+          ...state.investment,
+          files: newFiles2,
+        }
       }
       case 'REMOVE_INVESTMENT_FROM_STATE':
       return {

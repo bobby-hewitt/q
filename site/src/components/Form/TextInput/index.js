@@ -5,7 +5,10 @@ import { connect } from 'react-redux'
 import './style.css'
 
 const TextInput = props => (
+	<div className="textInput">
+	<label htmlFor={props.name}>{props.label}</label>
   	<input name={props.name} onChange={props.onChange} value={props.value} className="textInput" placeholder={props.placeholder} />
+  	</div>
 )
 
 

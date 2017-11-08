@@ -18,6 +18,7 @@ export default class Form extends Component {
        var e = form.elements[i];
        obj[e.name] = e.value
     }
+    console.log(obj)
     this.props.onSubmit(obj)
   }
 

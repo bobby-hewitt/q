@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import './style.css'
 import SectionHeader from '../SectionHeader'
 import { getMembers } from '../../../actions/admin'
-import Member from '../../../components/Member'
+import AdminTopLevelPersonRecord from '../../../components/AdminTopLevelPersonRecord'
 class Members extends Component {
 
 	componentWillMount(){
@@ -25,9 +25,11 @@ class Members extends Component {
 		return(
 			<div>
 				<SectionHeader section="Members" />
-				{this.props.members && this.props.members.map((member, i) => {
+				{this.props.members && this.props.members.map((person, i) => {
+					console.log(person)
 					return(
-						<Member key={i} member={member} action={this.onMemberClick.bind(this)}/>
+						<AdminTopLevelPersonRecord key={i} person={person} action={this.onMemberClick.bind(this)}/>
+
 					)
 				})
 

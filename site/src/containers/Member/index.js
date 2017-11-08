@@ -22,7 +22,7 @@ import AdminMenu from './AdminMenu'
 import { Route, Link, withRouter } from 'react-router-dom'
 import { setAsAdmin, goToLogin } from '../../actions/admin'
 
-class Admin extends Component{
+class Member extends Component{
 
 	constructor(props){
 		super(props)
@@ -48,42 +48,21 @@ class Admin extends Component{
 	render(){
 		return(
 			<div>
-				{this.props.isAdmin &&
-					<div className="adminContainer">
-						<div className="contianer-fluid">
-							<div className="row">
-								<div className="col-md-2"  style={{position:"fixed"}}>
-									<AdminMenu />
-								</div>
-								<div className="col-md-10 col-md-offset-2">
-									<div className="row">
-										<div className="col-md-8 col-md-offset-2">
-											<Route exact path="/admin/events" component={Events} />
-											<Route exact path="/admin/events/add" component={AddEvent} />
-											<Route exact path="/admin/events/edit" component={AddEvent} />
-											<Route exact path="/admin/investments" component={Investments} />
-											<Route exact path="/admin/investments/add" component={AddInvestment} />
-											<Route exact path="/admin/investments/edit" component={AddInvestment} />
-											<Route exact path="/admin/applicants" component={Applicants} />
-											<Route exact path="/admin/applicant/:id" component={ApplicantProfile} />
-											<Route exact path="/admin/members" component={Members} />
-											<Route exact path="/admin/member/:id" component={MemberProfile} />
-											<Route exact path="/admin/noticeboard" component={Noticeboard} />
-											<Route exact path="/admin/administrators" component={Administrators} />
-										</div>
-									</div>
-								</div>
+				<div className="memberContainer">
+					<div className="contianer-fluid">
+						<div className="row">
+							<div className="col-md-12">
+								HELLO	
 							</div>
-						</div>	
-					</div>
-				}
+						</div>
+					</div>	
+				</div>
 			</div>
 		)
 	}
 }
 
 const mapStateToProps = state => ({
-	isAdmin: state.user.isAdmin,
 	jwt: state.authenticate.token,
 	apiHost:state.setup.apiHost,
 	displayError: state.error.showError,

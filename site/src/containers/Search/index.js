@@ -47,6 +47,7 @@ class Applicants extends Component {
 		return(
 			<div>
 				<SectionHeader section="Applicants"/>
+					
 				{this.props.applicants && this.props.applicants.length > 0 && this.props.applicants.map((person, i ) => {
 					return(
 						<AdminTopLevelPersonRecord key={i} person={person} action={this.getApplicant.bind(this)}/>

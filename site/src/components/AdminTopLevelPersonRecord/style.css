@@ -1,0 +1,44 @@
+
+.adminTopLevelPersonRecordContainer{
+	padding:15px;
+	padding-bottom:25px;
+	width:100%;
+	margin-top:-1px;
+	border: 1px solid grey;
+}
+.adminTopLevelPersonRecordImage{
+	background-size: cover;
+	background-position: center;
+	width:50px;
+	height:50px;
+	border-radius:25px;
+}
+
+.adminTopLevelPersonRecordContainer .topRow, .adminTopLevelPersonRecordContainer .bottomRow{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height:50px;
+}
+
+.adminTopLevelPersonRecordContainer p{
+	margin:0;
+}
+
+.adminTopLevelPersonRecordContainer .topRowPadding h3, .adminTopLevelPersonRecordContainer .topRowPadding p{
+	margin:0;
+	margin-top:15px;
+}
+
+.adminTopLevelPersonRecordContainer .flexEnd{
+	width:100%;
+	height:100%;
+	display: flex;
+
+	justify-content: flex-end;
+}
+
+.chevronRight::after{
+	font-family: FontAwesome;
+	content:"\f054";
+}

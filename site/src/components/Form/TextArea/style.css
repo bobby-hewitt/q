@@ -1,4 +1,4 @@
-.textInput{
+.textArea{
 	display: flex;
 	flex-direction: column;
 	flex:1;
@@ -6,9 +6,10 @@
 	padding: 0px 5px;
 }
 
-.textInput input{
 
-	height:50px;
+
+.textArea textarea{
 	padding:10px;
+	height:150px;
 	margin:0;
 }
