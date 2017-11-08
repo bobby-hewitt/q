@@ -139,11 +139,23 @@ router.post('/rejectApplicant/:id', function(req,res,next){
 
 
 router.post('/addInvestment', function(req,res,next){
-
+	console.log(req.body)
 	let obj = {
+		 _id: req.body.id,
 		title: req.body.title,
 		imageUrl: req.body.imageUrl,
 		videoUrl: req.body.videoUrl,
+		files: req.body.files,
+		updates: req.body.updates,
+		financeTarget: req.body.financeTarget,
+		financePreMoneyVal: req.body.financePreMoneyVal,
+		financeRevenue: req.body.financeRevenue,
+		financeComittedFunds:req.body.financeComittedFunds,
+		financeMinimumInvestment: req.body.financeMinimumInvestment,
+		description: req.body.description,
+		feature1: req.body.feature1,
+		feature2: req.body.feature2,
+		feature3: req.body.feature3,
 	}
 
 	if (req.body.id && req.body.id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -193,7 +205,7 @@ router.get('/getInvestments', function(req,res,next){
 })
 
 router.get('/editInvestment/:id', function(req,res,next){
-	console.log(req.params)
+	console.log('here', req.params)
 	Investment.findOne({_id: req.params.id}, function(err, result){
 		if (err) { 
 			console.log('error getting event')
