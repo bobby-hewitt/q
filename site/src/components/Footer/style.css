@@ -1,0 +1,31 @@
+.Footer {
+	margin-top: 100px;
+	padding-top: 60px;
+	padding-bottom: 60px;
+	background: #1F3134;
+	color: #ffffff;
+}
+.Footer h5{ 
+	opacity: 0.5;
+	margin-bottom: 15px;
+}
+.Footer a {
+	display: block;
+	font-weight: 600;
+	font-size: 12px;
+	color: #FFFFFF;
+	letter-spacing: 1.43px;
+	margin: 15px 0;
+}
+.Footer a:hover {
+	opacity: 0.5;
+	text-decoration: none;
+}
+.Footer p {
+	margin-top: 0;
+}
+.Footer .disclaimers {
+	border-top: 1px solid rgba(255,255,255,0.1);
+	margin-top: 60px;
+	padding-top: 60px;
+}

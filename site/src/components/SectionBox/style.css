@@ -1,20 +1,36 @@
 .sectionBoxContainer{
 	position: relative;
+	color: #1E1E1E;
 }
-
+.sectionBoxContainer.dark {
+	color: #ffffff;
+}
 .sectionBoxInner{
 	position: absolute;
 	bottom:10px;
 	left:0px;
 	width:210px;
 	height:210px;
-}
+	padding: 30px;
 
+	box-shadow: 0 5px 13px 0 rgba(0,0,0,0.33);
+	border-radius: 1px;
+}
+.sectionBoxInner h1{
+	margin-bottom: 0;
+	font-size: 60px;
+	opacity: 0.4;
+	font-weight: 100;
+}
+.sectionBoxInner p{
+	margin-top: 0;
+	font-size: 18px;
+}
 .sectionBoxOuter{
-		width:210px;
+	width:210px;
 	height:210px;
 	position: absolute;
 	bottom:0px;
 	left:10px;
-	border: 1px solid black;
+	border: 1px solid #DEDCDC;
 }

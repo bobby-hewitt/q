@@ -22,7 +22,7 @@ class TitleSection extends Component {
 				}}
 			>
 				<div className="row">
-					<div className="col-md-8  col-md-offset-2">
+					<div className="col-md-9  col-md-offset-2">
 						{this.props.title ? <h1>{this.props.title}</h1> : null}
 						{this.props.subTitle ? (
 							<h4>{this.props.subTitle}</h4>

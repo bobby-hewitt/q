@@ -3,7 +3,7 @@ import './style.css'
 
 const SectionBox = (props) => (
   <div 
-    className="sectionBoxContainer"
+    className={`sectionBoxContainer ${props.className}`}
     style={{
       height:props.stemHeight ? 210 + props.stemHeight + 'px' : '220px'
     }}>
@@ -13,12 +13,12 @@ const SectionBox = (props) => (
       style={{
         background:props.background
       }}>
+      {props.children}
     </div>
 
     <div className="sectionBoxStem">
     </div>
   </div>
- 
 
 );
 

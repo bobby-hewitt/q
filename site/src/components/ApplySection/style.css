@@ -1,0 +1,33 @@
+
+.ApplySection-applyOnline-Container {
+	background: #1F3134;
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+}
+.ApplySection-applyPhone-Container {
+	background: #CED8DA;
+	color: #365156;
+	display: flex;
+	align-items: center;
+}
+.ApplySection-content {
+	min-height: 380px;
+	padding: 80px 100px 0;
+}
+.ApplySection-content p{
+	margin-bottom: 50px;
+}
+.ApplySection-content .qVenturesLink {
+	display: inline-block;
+	color: #ffffff;
+}
+.ApplySection-applyPhone-Container .qVenturesLink {
+	color: #365156;
+}
+.ApplySection-applyOnline h3{
+	margin-top: 0;
+}
+.ApplySection-d0sclaimer {
+	margin: 30px auto;
+}

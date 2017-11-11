@@ -1,0 +1,38 @@
+
+.MemberProfileSquare {
+	position:relative;
+	width: 100%;
+	padding-bottom: 100%;
+	background-size: cover;
+	background-position: center;
+}
+.MemberProfileSquare-content {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 30px;
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+}
+.MemberProfileSquare-content:before {
+	content: " ";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);
+}
+.MemberProfileSquare-content-details {
+	position: relative;
+	z-index: 1;
+}
+.MemberProfileSquare-content h5 {
+	margin: 0;
+}
+.MemberProfileSquare-content p {
+	margin: 0;
+	opacity: 0.5;
+}
