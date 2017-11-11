@@ -6,6 +6,8 @@ import './style.css'
 import SectionHeader from '../SectionHeader'
 import { getMembers } from '../../../actions/admin'
 import AdminTopLevelPersonRecord from '../../../components/AdminTopLevelPersonRecord'
+import Search from '../Search'
+
 class Members extends Component {
 
 	componentWillMount(){
@@ -20,11 +22,22 @@ class Members extends Component {
 		this.props.getMember(id)
 	}
 
+	updateMembers(value){
+		let param = value !== '' ? value : null
+		let payload = {
+			jwt: this.props.jwt,
+			url: this.props.apiHost,
+			param
+		}
+		this.props.getMembers(payload)
+	}
+
 
 	render(){
 		return(
 			<div>
 				<SectionHeader section="Members" />
+				<Search onSearch={this.updateMembers.bind(this)} />
 				{this.props.members && this.props.members.map((person, i) => {
 					console.log(person)
 					return(

@@ -1,21 +1,32 @@
 .formButton{
-	height:40px;
+	height:50px;
 	display: flex;
 	flex:1;
+	max-width: 200px;
 	padding: 0 20px;
 	align-items: center;
 	justify-content: center;
 	line-height:50px;
-	background: #f2f2f2;
+	color:white;
 	margin:5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#formButtonsContainer{
+	width:100%;
+	margin-top:50px;
+	display: flex;
+	align-items: flex-end;
+	flex-direction: row;
+	justify-content: flex-end;
+	flex:1;
 }
 
 #deleteButton{
-	background: #dd3232;
-	color:white;
+	color:#242424;
 }
 #submitButton{
-	background: #f2f2f2;
+	background: #242424;
 }
 
 .formContainer{

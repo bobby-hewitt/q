@@ -18,6 +18,11 @@
 .adminMenuHeader p{
 	color: white;
 	font-size: 12px;
-	padding:10px 20px 50px 20px;
+	padding:0px 20px 0px 20px;
+	opacity:0.5;
+	font-weight:light;
+}
+.adminMenuHeader img{
+	margin-bottom: -5px;
 }
 

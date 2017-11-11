@@ -4,7 +4,7 @@ import './style.css'
 const SectionHeader = (props) => (
 
   <div className="adminSectionHeaderContainer">
-  	<h3>{props.section}</h3>
+  	<h1>{props.section}</h1>
   	{props.addNew &&
 	  	<div 
 	  		className="addNewContainer" 

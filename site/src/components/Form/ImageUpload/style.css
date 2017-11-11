@@ -22,7 +22,6 @@
 	background: #242424;
 	color:#d8d8d8;
 	height:50px;
-	margin-top:10px;
 	font-size: 20px;
 	display: flex;
 	justify-content: center;
@@ -32,6 +31,8 @@
 
 
 .uploadImageContainer{
+	border: 1px solid #787878;
+	border-bottom: none;
 	margin-top:50px;
 	height:200px;
 	width:200px;

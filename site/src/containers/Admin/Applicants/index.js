@@ -6,7 +6,7 @@ import './style.css'
 import SectionHeader from '../SectionHeader'
 import AdminTopLevelPersonRecord from '../../../components/AdminTopLevelPersonRecord'
 import { getApplicants, approveApplicant, rejectApplicant } from '../../../actions/admin'
-
+import Search from '../Search'
 class Applicants extends Component {
 
 	componentWillMount(){
@@ -42,11 +42,23 @@ class Applicants extends Component {
 		this.props.getApplicant(id)
 	}
 
+	updateApplicants(value){
+		console.log('in update function', value)
+		let param = value !== '' ? value : null
+		let payload = {
+			jwt: this.props.jwt,
+			url: this.props.apiHost,
+			param
+		}
+		this.props.getApplicants(payload)
+	}
+
 
 	render(){
 		return(
 			<div>
 				<SectionHeader section="Applicants"/>
+				<Search onSearch={this.updateApplicants.bind(this)} />
 				{this.props.applicants && this.props.applicants.length > 0 && this.props.applicants.map((person, i ) => {
 					return(
 						<AdminTopLevelPersonRecord key={i} person={person} action={this.getApplicant.bind(this)}/>

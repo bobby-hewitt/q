@@ -11,7 +11,6 @@ import Profile from '../../../../components/Profile'
 import Button from '../../../../components/Button'
 
 
-
 class MemberProfile extends Component{
 
 	componentWillMount(){

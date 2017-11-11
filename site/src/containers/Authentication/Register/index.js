@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Form from '../../../components/Form'
 import TextInput from '../../../components/Form/TextInput'
-import FileUpload from '../../../components/Form/FileUpload'
+import TextArea from '../../../components/Form/TextArea'
+import ImageUpload from '../../../components/Form/ImageUpload'
 import Checkbox from '../../../components/Form/Checkbox'
 import './style.css'
 import $ from 'jquery'
@@ -35,7 +36,7 @@ class Register extends Component {
       password: Math.random() * (Math.random() * 10000000)
     }
     console.log(payload)
-    this.props.register(data)
+    // this.props.register(data)
   }
 
   render(){
@@ -45,48 +46,39 @@ class Register extends Component {
           <p>{this.props.errorMessage}</p>
         }
         <Form submitText="Submit Application" onSubmit={this.onSubmit.bind(this)} formId="signUpForm">
-          <h3 className="formHeader">Full name</h3>
           <TextInput placeholder="Full name" label="name" name="name"/>
-          <h3 className="formHeader">Email</h3>
           <TextInput placeholder="Email" label="email" name="email"/>
-          <h3 className="formHeader">Job Title</h3>
           <TextInput placeholder="Job title" label="Job Title" name="jobTitle"/>
-          <h3 className="formHeader">About you</h3>
-          <TextInput placeholder="Describe yourself" label="A little about you" name="description"/>
-          <h3 className="formHeader">Telephone</h3>
+          <TextArea placeholder="Describe yourself" label="A little about you" name="description"/>
           <TextInput placeholder="01234 567890" label="Telephone" name="phone"/>
-          <h3 className="formHeader">Country of residence</h3>
           <TextInput placeholder="uk" label="Country of residence" name="country"/>
           
-          <h3 className="formHeader">Investment preferences</h3>
           <div className="rowContainer">
-            <Checkbox label="hello" />
-            <Checkbox label="hello"/>
+            <Checkbox label="hello"  name="investmentPreferences" value="sector1"/>
+            <Checkbox label="hello" name="investmentPreferences" value="2"/>
           </div>
           <div className="rowContainer">
-            <Checkbox label="hello"/>
-            <Checkbox label="hello"/>
+            <Checkbox label="hello" name="investmentPreferences" value="3"/>
+            <Checkbox label="hello" name="investmentPreferences" value="4"/>
           </div>
           <div className="rowContainer">
-            <Checkbox label="hello"/>
-            <Checkbox label="hello"/>
+            <Checkbox label="hello" name="investmentPreferences" value="5"/>
+            <Checkbox label="hello" name="investmentPreferences" value="6"/>
           </div>
           <div className="rowContainer">
-            <Checkbox label="hello"/>
-            <Checkbox label="hello"/>
+            <Checkbox label="hello" name="investmentPreferences" value="7"/>
+            <Checkbox label="hello" name="investmentPreferences" value="8"/>
           </div>
 
-          <h3 className="formHeader">Investment size</h3>
           <div className="rowContainer">
-            <Checkbox label="hello"/>
-            <Checkbox label="hello"/>
+            <Checkbox label="hello" name="investmentPreferences" value="9"/>
+            <Checkbox label="hello" name="investmentPreferences" value="10"/>
           </div>
-          <h3 className="formHeader">Profile picture</h3>
           {this.props.avatarUrl &&
             <div className="avatarPreview" style={{backgroundImage: "url('" + this.props.avatarUrl + "')"}}/>
           }
-          <FileUpload name="file" filenamePrefix="user" onUploadImage={this.onUploadImage.bind(this)}/>
-          <input type="hidden" name="avatarUrl" value={this.props.avatarUrl ? this.props.avatarUrl : null} />
+          <ImageUpload name="file" filenamePrefix="user" onUploadImage={this.onUploadImage.bind(this)}/>
+          <input type="hidden" name="avatarUrl" value={this.props.avatarUrl ? this.props.avatarUrl : ''} />
           <input type="hidden" name="password" value={Math.random() * (Math.random() * 10000000000)} />
 
         </Form>
