@@ -1,5 +1,22 @@
-body {
+body, html {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  color: #333333;
+}
+
+/* 
+	black: #333333;
+	Green #1F3134
+	Brown: #554646;
+	Grey: #CED8DA;
+	GrayText: #9AB1B6;
+
+	lighetGrey: #DEDCDC;
+*/
+
+h1 {
+	font-size: 40px;
+	font-weight: 100;
 }

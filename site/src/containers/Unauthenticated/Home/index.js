@@ -6,6 +6,9 @@ import './style.css';
 import TitleSection from '../../../components/TitleSection';
 import Button from '../../../components/Button';
 import SectionBox from '../../../components/SectionBox';
+import MemberSquare from '../../../components/MemberSquare';
+import ApplySection from '../../../components/ApplySection';
+
 class Home extends Component {
 	render() {
 		return (
@@ -15,11 +18,11 @@ class Home extends Component {
 						<TitleSection
 							minHeight={window.innerWidth / 2}
 							vPadding={100}
-							title="Title section"
-							subTitle="this is a subtitle"
-							background="black"
+							background="#1F3134"
 							color="white"
-						/>
+						>
+							<img src="images/icon-white.png" />
+						</TitleSection>
 					</div>
 					<div className="col-md-6">
 						<TitleSection
@@ -82,31 +85,39 @@ class Home extends Component {
 									the market.
 								</p>
 								<p>
-									Minimum investment size is £25k per investment.
+									Minimum investment size is £25k per
+									investment.
 								</p>
 								<p>
-									Ability to follow-on in further funding rounds if appropriate.
+									Ability to follow-on in further funding
+									rounds if appropriate.
 								</p>
 								<p>
-									Members must be comfortable investing in a portfolio of unlisted securities.
+									Members must be comfortable investing in a
+									portfolio of unlisted securities.
 								</p>
 							</div>
 							<div className="col-sm-5 col-sm-offset-1">
 								<h5>CRITERIA</h5>
 								<p>
-									Members are vetted in person or over the telephone.
+									Members are vetted in person or over the
+									telephone.
 								</p>
 								<p>
-									Investors Only: must be able to deploy funds, no intermediaries.
+									Investors Only: must be able to deploy
+									funds, no intermediaries.
 								</p>
 								<p>
-									Minimum investment size is £25k per investment.
+									Minimum investment size is £25k per
+									investment.
 								</p>
 								<p>
-									Ability to follow-on in further funding rounds if appropriate.
+									Ability to follow-on in further funding
+									rounds if appropriate.
 								</p>
 								<p>
-									Members must be comfortable investing in a portfolio of unlisted securities.
+									Members must be comfortable investing in a
+									portfolio of unlisted securities.
 								</p>
 							</div>
 						</div>
@@ -117,31 +128,41 @@ class Home extends Component {
 						<h1>3</h1>
 						<h3>Ancillary Benefits</h3>
 						<p>
-							In addition to curated dealflow, our
-							membership provides access to a toptier
-							club of like-minded individuals, delivering value in the form of new business relationships, non-exec placements and other ancillary benefits.
+							In addition to curated dealflow, our membership
+							provides access to a toptier club of like-minded
+							individuals, delivering value in the form of new
+							business relationships, non-exec placements and
+							other ancillary benefits.
 						</p>
 						<p>
-							Being part of the Quintessentially Group,
-							members get access to exclusive enterprise,
-							luxury and charity events around the world. 
+							Being part of the Quintessentially Group, members
+							get access to exclusive enterprise, luxury and
+							charity events around the world.
 						</p>
 					</div>
 					<div className="col-sm-6">
-						<h1>3</h1>
-						<h3>Ancillary Benefits</h3>
+						<h1>4</h1>
+						<h3>Member Engagement</h3>
 						<p>
-							In addition to curated dealflow, our
-							membership provides access to a toptier
-							club of like-minded individuals, delivering value in the form of new business relationships, non-exec placements and other ancillary benefits.
+							We host regular investor meetings in London and
+							foster a club environment that provides best
+							practice sharing and where there is a spirit of give
+							and gain.
 						</p>
 						<p>
-							Being part of the Quintessentially Group,
-							members get access to exclusive enterprise,
-							luxury and charity events around the world. 
+							Members are invited to an online platform where they
+							can benefit from access to the latest deals and a
+							full member directory. The calibre of our membership
+							attracts the most promising entrepreneurs.
 						</p>
 					</div>
 				</div>
+				<div className="row Home-members">
+					<div className="col-sm-4">
+						<MemberSquare />
+					</div>
+				</div>
+				<ApplySection />
 			</div>
 		);
 	}
