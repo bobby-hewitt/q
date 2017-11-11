@@ -14,17 +14,16 @@ class Home extends Component {
 		return (
 			<div className="container-fluid Home">
 				<div className="row">
-					<div className="col-md-6 ">
+					<div className="col-md-6">
 						<TitleSection
 							minHeight={window.innerWidth / 2}
 							vPadding={100}
 							background="#1F3134"
 							color="white"
 						>
-							<img src="images/icon-white.png" />
 						</TitleSection>
 					</div>
-					<div className="col-md-6">
+					<div className="col-md-6 column-flush">
 						<TitleSection
 							minHeight={window.innerWidth / 2}
 							vPadding={100}
@@ -36,8 +35,6 @@ class Home extends Component {
 							<Button
 								width="200px"
 								copy="This is a button"
-								color="white"
-								background="black"
 							/>
 						</TitleSection>
 					</div>

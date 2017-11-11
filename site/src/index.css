@@ -4,6 +4,7 @@ body, html {
   font-family: sans-serif;
   font-family: 'Open Sans', sans-serif;
   color: #333333;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* 
@@ -17,6 +18,15 @@ body, html {
 */
 
 h1 {
+	font-family: 'Open Sans', sans-serif;
 	font-size: 40px;
 	font-weight: 100;
+}
+h3 {
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.column-flush {
+	padding: 0;
 }

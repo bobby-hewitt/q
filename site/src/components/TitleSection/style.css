@@ -10,3 +10,7 @@
 .titleSectionContainer.centered{
 	align-items: center;
 }
+
+.titleSectionContainer h1 {
+	margin-top: 0;
+}
