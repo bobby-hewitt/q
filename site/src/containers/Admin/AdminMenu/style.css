@@ -16,11 +16,15 @@
 }
 
 .adminMenuHeader p{
-	color: white;
-	font-size: 12px;
 	padding:0px 20px 0px 20px;
 	opacity:0.5;
-	font-weight:light;
+
+		font-size: 12px;
+	color: #FFFFFF;
+    font-weight: 600;
+	letter-spacing: 1.71px;
+	text-transform: uppercase;
+	line-height: 50px;
 }
 .adminMenuHeader img{
 	margin-bottom: -5px;

@@ -18,11 +18,12 @@
 }
 
 .uploadImageButton{
-	width:200px;
+	width:220px;
 	background: #242424;
 	color:#d8d8d8;
 	height:50px;
-	font-size: 20px;
+		font-family: 'Open Sans', sans-serif;
+	letter-spacing: 1.71px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -34,8 +35,8 @@
 	border: 1px solid #787878;
 	border-bottom: none;
 	margin-top:50px;
-	height:200px;
-	width:200px;
+	height:220px;
+	width:220px;
 	background-position: center;
 	background-size: cover;
 }

@@ -172,7 +172,7 @@ class AddInvestment extends Component {
 									return(
 										<div key={i} className="row">
 											<div className="col-md-2">
-											{formatDate(update.timestamp)}
+											<p className="adminInvestmentUpdateDate">{formatDate(update.timestamp)}</p>
 											</div>
 											<div className="col-md-10">
 												<TextArea formId="createNewInvestmentForm" label={"Update " + (parseInt(i) + 1)} name={"update" + i} value={update.copy} onChange={this.onUpdateChange.bind(this, i)}/>
@@ -182,7 +182,7 @@ class AddInvestment extends Component {
 								})}
 								</div>
 								
-								<TextArea formId="createNewInvestmentForm" label="New Update" name="newUpdate" placeholder="Type update here. If left blank no updates will be posted" value={newUpdate} onChange={this.onChange.bind(this)}/>
+								<TextArea formId="createNewInvestmentForm" label="New Update" name="newUpdate" placeholder="If left blank no updates will be posted" value={newUpdate} onChange={this.onChange.bind(this)}/>
 							</div>
 						</div>  
 			    </Form>
