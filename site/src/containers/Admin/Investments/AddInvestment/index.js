@@ -62,6 +62,7 @@ class AddInvestment extends Component {
 		}
 		this.props.editInvestmentInputValue(obj)
 		this.props.addInvestmentFile(obj)
+		console.log(obj)
 	}
 
 	onUploadImage(url){

@@ -88,7 +88,8 @@ class ImageUpload extends Component {
 				</div>
 				<div className="uploadImageButton" id="falseImageInput">Choose Image</div>
 			  	<input name={this.props.name} id={this.props.name} type="file" className="fileInput" placeholder={this.props.placeholder} />
-			  	
+			  	<input name={this.props.name} id={this.props.name} type="file" className="fileInput" placeholder={this.props.placeholder} />
+			  	<input type="hidden" name="imageUrl" value={this.state.imageUrl ? this.state.imageUrl : ''} />
 		  	</div>
 		)
 	}

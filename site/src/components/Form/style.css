@@ -22,7 +22,6 @@
 	display: flex;
 	flex-direction: column;
 	flex:1;
-
 }
 
 
@@ -35,4 +34,7 @@
 .formHeader{
 	font-size: 12px;
 	margin-left:5px;
+}
+label{
+	margin: 20px 0px 10px;
 }
