@@ -6,6 +6,10 @@ import Form from '../../../components/Form'
 import TextInput from '../../../components/Form/TextInput'
 import TextArea from '../../../components/Form/TextArea'
 import ImageUpload from '../../../components/Form/ImageUpload'
+import FileUpload from '../../../components/Form/FileUpload'
+import PageHeader from '../../../components/PageHeader';
+import Footer from '../../../components/Footer';
+import SectionBox from '../../../components/SectionBox';
 import Checkbox from '../../../components/Form/Checkbox'
 import './style.css'
 import $ from 'jquery'
@@ -41,47 +45,76 @@ class Register extends Component {
 
   render(){
     return(
-      <div className="signUpFormContainer">
+      <div className="Register">
+        <PageHeader
+          title="Apply for membership"
+          subline="Apply online with the form below"
+        />
         {this.props.displayError &&
           <p>{this.props.errorMessage}</p>
         }
-        <Form submitText="Submit Application" onSubmit={this.onSubmit.bind(this)} formId="signUpForm">
-          <TextInput placeholder="Full name" label="name" name="name"/>
-          <TextInput placeholder="Email" label="email" name="email"/>
-          <TextInput placeholder="Job title" label="Job Title" name="jobTitle"/>
-          <TextArea placeholder="Describe yourself" label="A little about you" name="description"/>
-          <TextInput placeholder="01234 567890" label="Telephone" name="phone"/>
-          <TextInput placeholder="uk" label="Country of residence" name="country"/>
-          
-          <div className="rowContainer">
-            <Checkbox label="hello"  name="investmentPreferences" value="sector1"/>
-            <Checkbox label="hello" name="investmentPreferences" value="2"/>
-          </div>
-          <div className="rowContainer">
-            <Checkbox label="hello" name="investmentPreferences" value="3"/>
-            <Checkbox label="hello" name="investmentPreferences" value="4"/>
-          </div>
-          <div className="rowContainer">
-            <Checkbox label="hello" name="investmentPreferences" value="5"/>
-            <Checkbox label="hello" name="investmentPreferences" value="6"/>
-          </div>
-          <div className="rowContainer">
-            <Checkbox label="hello" name="investmentPreferences" value="7"/>
-            <Checkbox label="hello" name="investmentPreferences" value="8"/>
-          </div>
 
-          <div className="rowContainer">
-            <Checkbox label="hello" name="investmentPreferences" value="9"/>
-            <Checkbox label="hello" name="investmentPreferences" value="10"/>
-          </div>
-          {this.props.avatarUrl &&
-            <div className="avatarPreview" style={{backgroundImage: "url('" + this.props.avatarUrl + "')"}}/>
-          }
-          <ImageUpload name="file" filenamePrefix="user" onUploadImage={this.onUploadImage.bind(this)}/>
-          <input type="hidden" name="avatarUrl" value={this.props.avatarUrl ? this.props.avatarUrl : ''} />
-          <input type="hidden" name="password" value={Math.random() * (Math.random() * 10000000000)} />
+        <div className="Register-content container-fluid">
+          <div className="row">
+            <div className="col-sm-2 col-sm-offset-1">
+              <SectionBox background="#554646" className="dark">
+                <h3>About You</h3>
+              </SectionBox>
+            </div>
+            <div className="col-sm-6 col-sm-offset-1">
+              <Form submitText="Submit Application" onSubmit={this.onSubmit.bind(this)} formId="signUpForm">
+                <TextInput placeholder="Full name" label="Full Name" name="name"/>
+                <TextInput placeholder="Email" label="Email" name="email"/>
+                <TextInput placeholder="Job title" label="Job Title" name="jobTitle"/>
+                <TextInput placeholder="Describe yourself" label="A little about you" name="description"/>
+                <TextInput placeholder="01234 567890" label="Telephone" name="phone"/>
+                <TextInput placeholder="uk" label="Country of residence" name="country"/>
+                
+                <br/><br/>
+                <h3 className="formHeader">Investment preferences</h3>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown" />
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown"/>
+                </div>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown"/>
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown"/>
+                </div>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown"/>
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown"/>
+                </div>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown"/>
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown"/>
+                </div>
+                
+                <br/><br/>
 
-        </Form>
+                <h3 className="formHeader">Investment size</h3>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown"/>
+                  <Checkbox label="Healthcare" name="investmentSectors" value="unknown"/>
+                </div>
+
+                <br/><br/>
+
+
+                <h3 className="formHeader">Upload a photo</h3>
+                {this.props.avatarUrl &&
+                  <div className="avatarPreview" style={{backgroundImage: "url('" + this.props.avatarUrl + "')"}}/>
+                }
+                <FileUpload name="file" filenamePrefix="user" onUploadImage={this.onUploadImage.bind(this)}/>
+                <input type="hidden" name="avatarUrl" value={this.props.avatarUrl ? this.props.avatarUrl : null} />
+                <input type="hidden" name="password" value={Math.random() * (Math.random() * 10000000000)} />
+                
+                <br/><br/>
+
+              </Form>
+            </div>
+          </div>
+        </div>
+        <Footer />
       </div>
     )
   }

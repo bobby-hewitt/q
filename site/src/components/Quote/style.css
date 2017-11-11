@@ -1,0 +1,11 @@
+.Quote {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background: #CED8DA;
+}
+.quote-content {
+	padding: 0 80px;
+}
+.quote-content h5 {
+	color: #212121;
+}

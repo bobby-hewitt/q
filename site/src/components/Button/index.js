@@ -10,7 +10,7 @@ const Button = (props) => (
   		color: props.color,
   		backgroundColor: props.background
   	}}>
-  	<p>{props.copy}</p>
+  	{props.copy}
   </div>
 );
 

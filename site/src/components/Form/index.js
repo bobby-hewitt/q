@@ -17,7 +17,7 @@ export default class Form extends Component {
     let checkboxes = {}
     for ( var i = 0; i < form.elements.length; i++ ) {
        var e = form.elements[i];
-       
+        
        if (e.type === 'checkbox'){
           if (e.checked){
             if (checkboxes[e.name]){

@@ -1,5 +1,88 @@
-body {
+body, html {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  color: #333333;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 
+	black: #333333;
+	Green #1F3134
+	Brown: #554646;
+	Grey: #CED8DA;
+	GrayText: #365156;
+
+	lighetGrey: #DEDCDC;
+*/
+
+h1 {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 40px;
+	font-weight: 100;
+}
+h3 {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1.8;
+}
+h3.semi {
+	font-weight: 600;
+}
+h5 {
+	font-weight: 500;
+	font-size: 14px;
+	color: #FFFFFF;
+	letter-spacing: 2px;
+}
+p {
+	line-height: 1.5;
+}
+p.small {
+	font-size: 12px;
+	opacity: 0.6;
+}
+
+.qVenturesLink {
+	display: inline-block;
+	font-family: OpenSans-Semibold;
+	font-size: 14px;
+	letter-spacing: 2px;
+	line-height: 22px;
+	position: relative;
+}
+.qVenturesLink:before {
+	position: absolute;
+	right: -25px;
+	top: 50%;
+	content: " ";
+	width: 20px;
+	height: 1px;
+	background: #ffffff;
+}
+.qVenturesLink:hover {
+	text-decoration: none;
+}
+.text-center {
+	text-align: center;
+}
+
+.snack {
+	margin-top: 60px;
+	width: 40px;
+	height: 1px;
+	display: inline-block;
+	background: #CED8DA;
+}
+.form-group {
+	margin-bottom: 15px;
+}
+
+.valign {
+	display: flex;
+	align-items: center;
+}
+.column-flush {
+	padding: 0;
 }
