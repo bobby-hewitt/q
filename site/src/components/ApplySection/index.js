@@ -39,6 +39,7 @@ export default class ApplySection extends Component {
 							<span className="qVenturesLink">
 								+44 2030 736 921
 							</span>
+							<br/>
 							<span className="qVenturesLink">
 								LONDON@QVENTURES.CO
 							</span>

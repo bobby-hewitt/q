@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 import Form from '../../../components/Form'
 import TextInput from '../../../components/Form/TextInput'
 import FileUpload from '../../../components/Form/FileUpload'
+import PageHeader from '../../../components/PageHeader';
+import Footer from '../../../components/Footer';
+import SectionBox from '../../../components/SectionBox';
 import Checkbox from '../../../components/Form/Checkbox'
 import './style.css'
 import $ from 'jquery'
@@ -40,56 +43,74 @@ class Register extends Component {
 
   render(){
     return(
-      <div className="signUpFormContainer">
+      <div className="Register">
+        <PageHeader
+          title="Apply for membership"
+          subline="Apply online with the form below"
+        />
         {this.props.displayError &&
           <p>{this.props.errorMessage}</p>
         }
-        <Form submitText="Submit Application" onSubmit={this.onSubmit.bind(this)} formId="signUpForm">
-          <h3 className="formHeader">Full name</h3>
-          <TextInput placeholder="Full name" label="name" name="name"/>
-          <h3 className="formHeader">Email</h3>
-          <TextInput placeholder="Email" label="email" name="email"/>
-          <h3 className="formHeader">Job Title</h3>
-          <TextInput placeholder="Job title" label="Job Title" name="jobTitle"/>
-          <h3 className="formHeader">About you</h3>
-          <TextInput placeholder="Describe yourself" label="A little about you" name="description"/>
-          <h3 className="formHeader">Telephone</h3>
-          <TextInput placeholder="01234 567890" label="Telephone" name="phone"/>
-          <h3 className="formHeader">Country of residence</h3>
-          <TextInput placeholder="uk" label="Country of residence" name="country"/>
-          
-          <h3 className="formHeader">Investment preferences</h3>
-          <div className="rowContainer">
-            <Checkbox label="hello" />
-            <Checkbox label="hello"/>
-          </div>
-          <div className="rowContainer">
-            <Checkbox label="hello"/>
-            <Checkbox label="hello"/>
-          </div>
-          <div className="rowContainer">
-            <Checkbox label="hello"/>
-            <Checkbox label="hello"/>
-          </div>
-          <div className="rowContainer">
-            <Checkbox label="hello"/>
-            <Checkbox label="hello"/>
-          </div>
+        <div className="Register-content container-fluid">
+          <div className="row">
+            <div className="col-sm-2 col-sm-offset-1">
+              <SectionBox background="#554646" className="dark">
+                <h3>About You</h3>
+              </SectionBox>
+            </div>
+            <div className="col-sm-6 col-sm-offset-1">
+              <Form submitText="Submit Application" onSubmit={this.onSubmit.bind(this)} formId="signUpForm">
+                <TextInput placeholder="Full name" label="Full Name" name="name"/>
+                <TextInput placeholder="Email" label="Email" name="email"/>
+                <TextInput placeholder="Job title" label="Job Title" name="jobTitle"/>
+                <TextInput placeholder="Describe yourself" label="A little about you" name="description"/>
+                <TextInput placeholder="01234 567890" label="Telephone" name="phone"/>
+                <TextInput placeholder="uk" label="Country of residence" name="country"/>
+                
+                <br/><br/>
+                <h3 className="formHeader">Investment preferences</h3>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare" />
+                  <Checkbox label="Healthcare"/>
+                </div>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare"/>
+                  <Checkbox label="Healthcare"/>
+                </div>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare"/>
+                  <Checkbox label="Healthcare"/>
+                </div>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare"/>
+                  <Checkbox label="Healthcare"/>
+                </div>
+                
+                <br/><br/>
 
-          <h3 className="formHeader">Investment size</h3>
-          <div className="rowContainer">
-            <Checkbox label="hello"/>
-            <Checkbox label="hello"/>
-          </div>
-          <h3 className="formHeader">Profile picture</h3>
-          {this.props.avatarUrl &&
-            <div className="avatarPreview" style={{backgroundImage: "url('" + this.props.avatarUrl + "')"}}/>
-          }
-          <FileUpload name="file" filenamePrefix="user" onUploadImage={this.onUploadImage.bind(this)}/>
-          <input type="hidden" name="avatarUrl" value={this.props.avatarUrl ? this.props.avatarUrl : null} />
-          <input type="hidden" name="password" value={Math.random() * (Math.random() * 10000000000)} />
+                <h3 className="formHeader">Investment size</h3>
+                <div className="rowContainer">
+                  <Checkbox label="Healthcare"/>
+                  <Checkbox label="Healthcare"/>
+                </div>
 
-        </Form>
+                <br/><br/>
+
+                <h3 className="formHeader">Upload a photo</h3>
+                {this.props.avatarUrl &&
+                  <div className="avatarPreview" style={{backgroundImage: "url('" + this.props.avatarUrl + "')"}}/>
+                }
+                <FileUpload name="file" filenamePrefix="user" onUploadImage={this.onUploadImage.bind(this)}/>
+                <input type="hidden" name="avatarUrl" value={this.props.avatarUrl ? this.props.avatarUrl : null} />
+                <input type="hidden" name="password" value={Math.random() * (Math.random() * 10000000000)} />
+                
+                <br/><br/>
+
+              </Form>
+            </div>
+          </div>
+        </div>
+        <Footer />
       </div>
     )
   }
