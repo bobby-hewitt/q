@@ -18,13 +18,21 @@ router.get('/users', function(req, res, next){
 })
 
 router.get('/applicants', function(req, res, next){
- 	User.find({isApproved: {$ne: true}}, function(err, applicants) {
+	let paramObj = {isApproved: {$ne: true}}
+	if (req.query.search){
+		paramObj = {isApproved: {$ne: true}, "name" : {$regex :  new RegExp(req.query.search, "i") }}
+	} 
+ 	User.find(paramObj, function(err, applicants) {
 	res.json(applicants)
   })
 })
 
 router.get('/members', function(req, res, next){
- 	User.find({isApproved: true}, function(err, members) {
+	let paramObj = {isApproved: true}
+	if (req.query.search){
+		paramObj = {isApproved: true, "name" : {$regex :  new RegExp(req.query.search, "i") }}
+	} 
+ 	User.find(paramObj, function(err, members) {
 	res.json(members)
   })
 })
@@ -195,11 +203,17 @@ router.post('/addInvestment', function(req,res,next){
 
 
 
-
+//".*" + req.query.search + ".*"
 
 
 router.get('/getInvestments', function(req,res,next){
-	Investment.find({}, function(err, users) {
+	let paramObj = {}
+	if (req.query.search){
+		paramObj = {"title" : {$regex :  new RegExp(req.query.search, "i") }}
+	} 
+	Investment.find(paramObj, function(err, users) {
+		if (err) return res.status(500).send('Error fetching users')
+		console.log(users)
 		res.json(users)
   	})	
 })
@@ -321,7 +335,12 @@ router.get('/editEvent/:id', function(req,res,next){
 
 
 router.get('/events', function(req,res,next){
-	Event.find({}, function(err, events) {
+	let paramObj = {}
+	console.log(req.query.search)
+	if (req.query.search){
+		paramObj = {"name" : {$regex :  new RegExp(req.query.search, "i") }}
+	} 
+	Event.find(paramObj, function(err, events) {
 		res.json(events)
   	})
 })

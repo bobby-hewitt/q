@@ -5,7 +5,7 @@ const S3BUCKET = 'q-ventures'
 
 router.get('/signImageUpload', function (req, res) {
 	let randomString = Math.round(Math.random() * (Math.random() * 10000000000000))
-
+console.log('in upload file')
 	const s3 = new aws.S3();
 	const fileNamePrefix = req.query['file-name'];
 	const fileType = req.query['file-type'];
@@ -26,6 +26,7 @@ router.get('/signImageUpload', function (req, res) {
       signedRequest: data,
       url: `https://${S3BUCKET}.s3.amazonaws.com/${fileNamePrefix + '-' + randomString}`
     };
+    console.log('returning file')
     res.write(JSON.stringify(returnData));
     res.end();
   });
