@@ -30,13 +30,13 @@ class FileUpload extends Component {
 	}
 
 	getSignedRequest(file){
-		console.log(file)
 		const xhr = new XMLHttpRequest();
+		console.log(this.props.filenamePrefix, file.type)
 		xhr.open('GET', `${this.props.apiHost}/upload/signImageUpload?file-name=${this.props.filenamePrefix}&file-type=${file.type}`);
 		xhr.onreadystatechange = () => {
 			if(xhr.readyState === 4){
 			  if(xhr.status === 200){
-			  	console.log(xhr.responseText)
+			  	console.log('signed request recieved')
 			    const response = JSON.parse(xhr.responseText);
 			    this.uploadFile(file, response.signedRequest, response.url);
 			  }
@@ -51,11 +51,14 @@ class FileUpload extends Component {
 
 	uploadFile(file, signedRequest, url){
 		let self = this;
+		console.log('uploading file', file, signedRequest, url)
 	  const xhr = new XMLHttpRequest();
 	  xhr.open('PUT', signedRequest);
 	  xhr.onreadystatechange = () => {
+	  	console.log(xhr)
 	    if(xhr.readyState === 4){
 	      if(xhr.status === 200){
+	      	console.log('file uploaded')
 	        self.props.onUploadImage(url, this.state.label)
 	        self.setState({browseLabel: 'Browse', label: ''}, () => {
 	        	console.log(this.state)

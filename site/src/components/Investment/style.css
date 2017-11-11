@@ -1,4 +1,30 @@
+
+
+.adminInvestmentContainer{
+	width: 100%;
+	height:100%;
+	padding:20px;
+	border:1px solid #787878;
+	margin-top:-1px;
+}
+
 .investmentImage{
-	width:200px;
-	height:auto;
+	width:100px;
+	height:100px;
+	background-size: cover;
+	background-position: center;
+	border-radius: 50px;
+}
+
+.chevronRight{
+	height:100%;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.chevronRight::after{
+	margin-top:40px;
+	font-family: FontAwesome;
+	content:"\f054";
 }

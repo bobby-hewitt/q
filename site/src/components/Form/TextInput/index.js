@@ -6,7 +6,7 @@ import './style.css'
 
 const TextInput = props => (
 	<div className="textInput">
-	<label htmlFor={props.name}>{props.label}</label>
+	{props.label ? <label htmlFor={props.name}>{props.label}</label> : null}
   	<input name={props.name} onChange={props.onChange} value={props.value} className="textInput" placeholder={props.placeholder} />
   	</div>
 )

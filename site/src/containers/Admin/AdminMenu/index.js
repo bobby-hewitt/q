@@ -16,7 +16,10 @@ class AdminMenu extends Component{
 	render(){
 		return(
 			<div className="adminMenuContainer">
-				<h3>QVentures</h3>
+				<div className="adminMenuHeader">
+					<img src={require('../../../assets/images/logoWhite.png')} />
+					<p>ADMIN</p>
+				</div>
 				<AdminMenuButton copy="Investments" isActive={this.props.menuItem === 'investments'} buttonId="investments" action={this.menuItemSelected.bind(this)}/>
 				<AdminMenuButton copy="Applicants" isActive={this.props.menuItem === 'applicants'} buttonId="applicants" action={this.menuItemSelected.bind(this)}/>	
 				<AdminMenuButton copy="Members" isActive={this.props.menuItem === 'members'} buttonId="members" action={this.menuItemSelected.bind(this)}/>

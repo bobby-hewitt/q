@@ -9,6 +9,10 @@
 	transition:all 0.5s ease;
 }
 
+.adminMenuButtonContainer p{
+	color:white;
+	font-size: 12px;
+}
 .adminMenuButtonContainer.active{
-	background:white;
+	background:#1B2C2F;
 }
