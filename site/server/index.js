@@ -18,7 +18,7 @@ const userRoute = require('./routes/user')
 const uploadRoute = require('./routes/upload')
 const bodyParser = require('body-parser')
 const adminRoute = require('./routes/admin')
-require('dotenv').config({path: '.env'})
+require('dotenv').config({path: 'server/.env'})
 const jwtExtractor = require('./helpers/jwtExtractor')
 const aws = require('aws-sdk');
 const authenticateRequest = require('./helpers/authenticateRequest')
