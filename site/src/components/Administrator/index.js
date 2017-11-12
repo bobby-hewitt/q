@@ -42,9 +42,6 @@ const Administrator = (props) => (
 			    	</div>
 			    </div>
 			</div>
-	    	{props.canRemove &&
-	    		<Button copy="Remove admin rights" />
-	    	}
 	    </div>
   </div>
   </div>

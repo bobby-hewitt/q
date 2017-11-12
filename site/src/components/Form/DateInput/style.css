@@ -1,0 +1,15 @@
+.dateInput{
+	display: flex;
+	flex-direction: column;
+	flex:1;
+	margin:5px;
+	padding: 0px 5px;
+}
+
+.dateInput input{
+	display: flex;
+	flex-direction: row;
+	height:50px;
+	padding:10px;
+	margin:0;
+}

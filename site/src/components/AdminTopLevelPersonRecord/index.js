@@ -39,9 +39,6 @@ const AdminTopLevelPersonRecord = (props) => (
 			    	</div>
 			    </div>
 			</div>
-	    	{props.canRemove &&
-	    		<Button copy="Remove admin rights" action={props.action.bind(this, props.person._id)}/>
-	    	}
 	    </div>
   </div>
   </div>

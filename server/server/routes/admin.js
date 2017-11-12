@@ -78,6 +78,7 @@ router.post('/revokeMembership/:id', function(req,res,next){
 router.get('/removeAdminRights/:id', function(req,res,next){
 	   User.findOne({_id: req.params.id}, function(err, user) {
 			user.isAdmin = false;
+
 			user.save(function(err) {
 				if(err){
 					res.status(500).send({error: 'Error revoking admin rights'})
@@ -89,7 +90,25 @@ router.get('/removeAdminRights/:id', function(req,res,next){
 				}
 			})
     	})
+})
 
+router.get('/makeAdmin/:id', function(req,res,next){
+	console.log('makinf admin')
+	   User.findOne({_id: req.params.id}, function(err, user) {
+			user.isAdmin = true;
+			console.log('making admin')
+			user.save(function(err) {
+				if(err){
+					res.status(500).send({error: 'Error revoking admin rights'})
+				} else {	
+					User.find({isAdmin: true}, function (err, applicants) {
+						if (err) return res.status(500).send({error: 'Could not find admin users'})
+							console.log('SENDING', applicants)
+						res.json(applicants)
+					})
+				}
+			})
+    	})
 })
 
 

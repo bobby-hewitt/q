@@ -389,10 +389,33 @@ export const removeAdminRights = (payload) => {
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
         console.log('RESPONSE FROM GET APPLICANTS', response)
+        
         dispatch({
           type: 'SET_ADMINISTRATORS',
           payload: response
         })
+        dispatch(push('/admin/administrators'))
+      },
+      error: function(err){
+        console.log('ERROR WITH API CALL', err)
+      }
+    });
+  }
+}
+
+export const makeAdmin = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/makeAdmin/' + payload.data,
+      type: "GET",
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+       console.log('these are administrators', response)
+        dispatch({
+          type: 'SET_ADMINISTRATORS',
+          payload: response
+        })
+         dispatch(push('/admin/administrators'))
       },
       error: function(err){
         console.log('ERROR WITH API CALL', err)
