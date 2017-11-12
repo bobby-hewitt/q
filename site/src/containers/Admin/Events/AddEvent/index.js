@@ -7,6 +7,8 @@ import { submitNewEvent, deleteEvent, editEventInputValue } from '../../../../ac
 import { removeEventFromState } from '../../../../actions/cleanup'
 import Form from '../../../../components/Form'
 import TextInput from '../../../../components/Form/TextInput'
+import DateInput from '../../../../components/Form/DateInput'
+import TimeInput from '../../../../components/Form/TimeInput'
 import FileUpload from '../../../../components/Form/FileUpload'
 
 class AddEvent extends Component {
@@ -67,8 +69,8 @@ class AddEvent extends Component {
 					deleteAction={this.deleteEvent.bind(this, event._id)}>	         
 					<TextInput placeholder="Name of event" value={name} label="Event Name" name="name" onChange={this.onChange.bind(this)}/>
 					<TextInput placeholder="Describe the event" value={description} label="Event Name" name="description" onChange={this.onChange.bind(this)}/>
-					<input type="date" name="date"  value={date} onChange={this.onChange.bind(this)}/>
-					<input type="time" name="time"  value={time} onChange={this.onChange.bind(this)}/>
+					<DateInput  value={date} label="Event Date" name="date" onChange={this.onChange.bind(this)}/>
+					<TimeInput  value={time} label="Start Time" name="time" onChange={this.onChange.bind(this)}/>
 					<TextInput placeholder="Address line 1" value={addressLine1} label="Address" name="addressLine1" onChange={this.onChange.bind(this)}/>
 					<TextInput placeholder="Address line 2" value={addressLine2} name="addressLine2" onChange={this.onChange.bind(this)}/>
 					<TextInput placeholder="Address line 3" value={addressLine3} name="addressLine3" onChange={this.onChange.bind(this)}/>

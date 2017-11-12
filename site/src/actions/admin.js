@@ -5,10 +5,11 @@ import { push } from 'react-router-redux'
 //Manage Applications
 
 export const getApplicants = (payload) => {
+  console.log('getting applicants')
   return(dispatch) => {
-    console.log('in users action')
+    let url = payload.param ? payload.url + '/admin/applicants/?search=' + payload.param :  payload.url + '/admin/applicants/'
     $.ajax({
-      url: payload.url + '/admin/applicants',
+      url: url,
       type: "GET",
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
@@ -99,9 +100,10 @@ export const rejectApplicant = (payload) => {
 //Manage members
 
 export const getMembers = (payload) => {
+  let url = payload.param ? payload.url + '/admin/members/?search=' + payload.param :  payload.url + '/admin/members/'
   return(dispatch) => {
     $.ajax({
-      url: payload.url + '/admin/members',
+      url: url,
       type: "GET",
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
@@ -187,8 +189,11 @@ export const submitNewInvestment = (payload) => {
 
 export const getInvestments = (payload) => {
   return(dispatch) => {
+
+    let url = payload.param ? payload.url + '/admin/getInvestments/?search=' + payload.param :  payload.url + '/admin/getInvestments/'
+
     $.ajax({
-      url: payload.url + '/admin/getInvestments/',
+      url: url,
       type: "GET",
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
@@ -291,8 +296,10 @@ export const submitNewEvent = (payload) => {
 
 export const getEvents = (payload) => {
   return(dispatch) => {
+    console.log(payload)
+    let url = payload.param ? payload.url + '/admin/events/?search=' + payload.param :  payload.url + '/admin/events/'
     $.ajax({
-      url: payload.url + '/admin/events/',
+      url: url,
       type: "GET",
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
@@ -382,10 +389,33 @@ export const removeAdminRights = (payload) => {
       beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
       success: function(response) { 
         console.log('RESPONSE FROM GET APPLICANTS', response)
+        
         dispatch({
           type: 'SET_ADMINISTRATORS',
           payload: response
         })
+        dispatch(push('/admin/administrators'))
+      },
+      error: function(err){
+        console.log('ERROR WITH API CALL', err)
+      }
+    });
+  }
+}
+
+export const makeAdmin = (payload) => {
+  return(dispatch) => {
+    $.ajax({
+      url: payload.url + '/admin/makeAdmin/' + payload.data,
+      type: "GET",
+      beforeSend: function(xhr){xhr.setRequestHeader('jwt', payload.jwt);},
+      success: function(response) { 
+       console.log('these are administrators', response)
+        dispatch({
+          type: 'SET_ADMINISTRATORS',
+          payload: response
+        })
+         dispatch(push('/admin/administrators'))
       },
       error: function(err){
         console.log('ERROR WITH API CALL', err)

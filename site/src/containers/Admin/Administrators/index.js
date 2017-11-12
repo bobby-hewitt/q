@@ -3,7 +3,7 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getAdministrators, removeAdminRights } from '../../../actions/admin'
-import Administrator from '../../../components/Administrator'
+import AdminTopLevelPersonRecord from '../../../components/AdminTopLevelPersonRecord'
 import './style.css'
 
 import SectionHeader from '../SectionHeader'
@@ -21,22 +21,24 @@ class Administrators extends Component {
 		this.props.getAdministrators(payload)
 	}
 
-	removeAdminRights(id){
-		let payload = {
-			jwt: this.props.jwt,
-			url: this.props.apiHost,
-			data: id
-		}
-		this.props.removeAdminRights(payload)
+	createAdmin(){
+		console.log('asda')
+		this.props.addAdmin()
+	}
+
+
+
+	goToAdministrator(id){
+		this.props.goToAdministrator(id)
 	}
 
 	render(){
 		return(
 			<div>
-				<SectionHeader section="Administrators" item="post" addNew={false} />
+				<SectionHeader section="Administrators" addNew={true} action={this.createAdmin.bind(this)}/>
 				{this.props.administrators && this.props.administrators.map((administrator, i) => {
 					return(
-						<Administrator key={i} administrator={administrator} action={this.removeAdminRights.bind(this)} canRemove={this.props.administrators.length > 1}/>
+						<AdminTopLevelPersonRecord key={i} person={administrator} action={this.goToAdministrator.bind(this)} canRemove={this.props.administrators.length > 1}/>
 					)
 				})
 
@@ -53,11 +55,16 @@ const mapStateToProps = state => ({
 	apiHost:state.setup.apiHost,
 	displayError: state.error.showError,
   	errorMessage: state.error.errorMessage,
+
+
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 	getAdministrators,
-	removeAdminRights
+	removeAdminRights,
+	addAdmin: () => push('/admin/administrators/add'),
+	goToAdministrator: (id) => push('/admin/administrator/' + id)
+	
 }, dispatch)
 
 

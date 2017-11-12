@@ -55,10 +55,19 @@ class ApplicantProfile extends Component{
 		return(
 			<div>
 				<Profile user={this.props.applicant} />
-				<div className="rowContainer">
-					<Button copy="Approve" action={this.approveApplicant.bind(this)}/>
-					<Button copy="Reject" action={this.rejectApplicant.bind(this)}/>
+				<div className="row">
+					<div className="col-md-10 col-md-offset-2">
+						<div className="row">
+							<div className="col-md-10">
+								<div className="adminApplicantButtonsContainer">
+									<Button copy="Reject" action={this.rejectApplicant.bind(this)} width="220px" background="white" color="black"/>
+									<Button copy="Approve" action={this.approveApplicant.bind(this)} width="220px"/>		
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+				
 			</div>
 		)
 	}

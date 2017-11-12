@@ -4,13 +4,7 @@ const blankInvestment = {
   imageUrl: '',
   videoUrl: '',
   files: [],
-  updates: [{
-    timestamp: 11111,
-    copy: 'asdsadasdsa'
-  },{
-    timestamp: 11111,
-    copy: 'asdsadasdsa'
-  }],
+  updates: [],
   financeTarget: '',
   financePreMoneyVal: '',
   financeRevenue: '',

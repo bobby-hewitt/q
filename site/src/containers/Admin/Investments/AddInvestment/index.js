@@ -91,7 +91,6 @@ class AddInvestment extends Component {
 	}
 
 	render(){
-		console.log(this.props)
 		let investment = this.props.investment
 		let title = investment.title
 		let files = investment.files
@@ -126,7 +125,7 @@ class AddInvestment extends Component {
 							<div className="col-md-9">
 								
 								<Section title="Basic details" />
-								<TextInput placeholder="Investment title" value={title} label="password" name="title" onChange={this.onChange.bind(this)}/>
+								<TextInput placeholder="Investment title" value={title} label="Title" name="title" onChange={this.onChange.bind(this)}/>
 								<TextArea formId="createNewInvestmentForm" label="Company description" name="description" value={description} onChange={this.onChange.bind(this)}/>
 								<TextInput value={videoUrl} label="Video URL" name="videoUrl" onChange={this.onChange.bind(this)}/>
 								
@@ -172,7 +171,7 @@ class AddInvestment extends Component {
 									return(
 										<div key={i} className="row">
 											<div className="col-md-2">
-											{formatDate(update.timestamp)}
+											<p className="adminInvestmentUpdateDate">{formatDate(update.timestamp)}</p>
 											</div>
 											<div className="col-md-10">
 												<TextArea formId="createNewInvestmentForm" label={"Update " + (parseInt(i) + 1)} name={"update" + i} value={update.copy} onChange={this.onUpdateChange.bind(this, i)}/>
@@ -182,7 +181,7 @@ class AddInvestment extends Component {
 								})}
 								</div>
 								
-								<TextArea formId="createNewInvestmentForm" label="New Update" name="newUpdate" placeholder="Type update here. If left blank no updates will be posted" value={newUpdate} onChange={this.onChange.bind(this)}/>
+								<TextArea formId="createNewInvestmentForm" label="New Update" name="newUpdate" placeholder="If left blank no updates will be posted" value={newUpdate} onChange={this.onChange.bind(this)}/>
 							</div>
 						</div>  
 			    </Form>

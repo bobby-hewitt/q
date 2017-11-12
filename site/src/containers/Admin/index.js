@@ -15,6 +15,8 @@ import Events from './Events'
 import Applicants from './Applicants'
 import Noticeboard from './Noticeboard'
 import Administrators from './Administrators'
+import AddAdministrator from './Administrators/AddAdministrator'
+import AdministratorProfile from './Administrators/AdministratorProfile'
 import ApplicantProfile from './Applicants/ApplicantProfile'
 //components
 import AdminMenu from './AdminMenu'
@@ -58,6 +60,7 @@ class Admin extends Component{
 								<div className="col-md-10 col-md-offset-2">
 									<div className="row">
 										<div className="col-md-8 col-md-offset-2">
+										
 											<Route exact path="/admin/events" component={Events} />
 											<Route exact path="/admin/events/add" component={AddEvent} />
 											<Route exact path="/admin/events/edit" component={AddEvent} />
@@ -70,6 +73,8 @@ class Admin extends Component{
 											<Route exact path="/admin/member/:id" component={MemberProfile} />
 											<Route exact path="/admin/noticeboard" component={Noticeboard} />
 											<Route exact path="/admin/administrators" component={Administrators} />
+											<Route exact path="/admin/administrators/add" component={AddAdministrator} />
+											<Route exact path="/admin/administrator/:id" component={AdministratorProfile} />
 										</div>
 									</div>
 								</div>

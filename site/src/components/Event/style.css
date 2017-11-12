@@ -1,5 +1,7 @@
 .adminEventContainer{
 	padding:20px;
-	border: 1px solid black;
-	margin-top: -1px;
+	border: 1px solid grey;
+	margin-top: -2px;
+	background:white;
+
 }

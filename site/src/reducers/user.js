@@ -1,14 +1,14 @@
 
 const initialState = {
-  avatarUrl: null
+  image: null
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_AVATAR_URL':
+    case 'SET_IMAGE_URL':
       return {
         ...state,
-        avatarUrl: action.payload
+        imageUrl: action.payload
       }
     case 'SET_AS_ADMIN':
       return {

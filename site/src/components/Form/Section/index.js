@@ -4,7 +4,7 @@ import './style.css'
 
 const Section = (props) => (
   <div className="formSectionContainer">
-    	<p>{props.title}</p>
+    	<h3>{props.title}</h3>
     	<div className="formSectionLine" />
   </div>
 );

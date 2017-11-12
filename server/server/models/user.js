@@ -7,8 +7,14 @@ var User = new Schema({
 	resetPasswordExpires: '',
 	isAdmin: false,
 	isApproved: false,
-	avatarUrl: '',
-	name: ''
+	imageUrl: '',
+	name: '',
+    description: '',
+    country: '',
+    investmentSectors: [],
+    investmentSize: [],
+    jobTitle: '',
+    phone: ''
 });
  
 // See passport-local-mongoose docs for schema customization options

@@ -7,6 +7,7 @@ import { getEvents, deleteEvent, editEvent } from '../../../actions/admin'
 import Form from '../../../components/Form'
 import Event from '../../../components/Event'
 import SectionHeader from '../SectionHeader'
+import Search from '../Search'
 
 class Events extends Component {
 
@@ -33,11 +34,22 @@ class Events extends Component {
 		console.log('calling add event')
 		this.props.addEvent()
 	}
+
+	updateEvents(value){
+		let param = value !== '' ? value : null
+		let payload = {
+			jwt: this.props.jwt,
+			url: this.props.apiHost,
+			param
+		}
+		this.props.getEvents(payload)
+	}
 	
 	render(){
 		return(
 			<div>
 				<SectionHeader section="Events" item="event" addNew={true} action={this.addEvent.bind(this)}/>
+				<Search onSearch={this.updateEvents.bind(this)} />
 				{this.props.events && this.props.events.map((event, i) => {
 					return(
 						<Event event={event} editEvent={this.editEvent.bind(this)} key={i} admin={true} />

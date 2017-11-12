@@ -10,8 +10,12 @@
 }
 
 .adminMenuButtonContainer p{
-	color:white;
 	font-size: 12px;
+	color: #FFFFFF;
+    font-weight: 600;
+	letter-spacing: 1.71px;
+	text-transform: uppercase;
+	line-height: 50px;
 }
 .adminMenuButtonContainer.active{
 	background:#1B2C2F;

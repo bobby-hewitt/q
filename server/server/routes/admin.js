@@ -18,13 +18,21 @@ router.get('/users', function(req, res, next){
 })
 
 router.get('/applicants', function(req, res, next){
- 	User.find({isApproved: {$ne: true}}, function(err, applicants) {
+	let paramObj = {isApproved: {$ne: true}}
+	if (req.query.search){
+		paramObj = {isApproved: {$ne: true}, "name" : {$regex :  new RegExp(req.query.search, "i") }}
+	} 
+ 	User.find(paramObj, function(err, applicants) {
 	res.json(applicants)
   })
 })
 
 router.get('/members', function(req, res, next){
- 	User.find({isApproved: true}, function(err, members) {
+	let paramObj = {isApproved: true}
+	if (req.query.search){
+		paramObj = {isApproved: true, "name" : {$regex :  new RegExp(req.query.search, "i") }}
+	} 
+ 	User.find(paramObj, function(err, members) {
 	res.json(members)
   })
 })
@@ -70,6 +78,7 @@ router.post('/revokeMembership/:id', function(req,res,next){
 router.get('/removeAdminRights/:id', function(req,res,next){
 	   User.findOne({_id: req.params.id}, function(err, user) {
 			user.isAdmin = false;
+
 			user.save(function(err) {
 				if(err){
 					res.status(500).send({error: 'Error revoking admin rights'})
@@ -81,7 +90,25 @@ router.get('/removeAdminRights/:id', function(req,res,next){
 				}
 			})
     	})
+})
 
+router.get('/makeAdmin/:id', function(req,res,next){
+	console.log('makinf admin')
+	   User.findOne({_id: req.params.id}, function(err, user) {
+			user.isAdmin = true;
+			console.log('making admin')
+			user.save(function(err) {
+				if(err){
+					res.status(500).send({error: 'Error revoking admin rights'})
+				} else {	
+					User.find({isAdmin: true}, function (err, applicants) {
+						if (err) return res.status(500).send({error: 'Could not find admin users'})
+							console.log('SENDING', applicants)
+						res.json(applicants)
+					})
+				}
+			})
+    	})
 })
 
 
@@ -195,11 +222,17 @@ router.post('/addInvestment', function(req,res,next){
 
 
 
-
+//".*" + req.query.search + ".*"
 
 
 router.get('/getInvestments', function(req,res,next){
-	Investment.find({}, function(err, users) {
+	let paramObj = {}
+	if (req.query.search){
+		paramObj = {"title" : {$regex :  new RegExp(req.query.search, "i") }}
+	} 
+	Investment.find(paramObj, function(err, users) {
+		if (err) return res.status(500).send('Error fetching users')
+		console.log(users)
 		res.json(users)
   	})	
 })
@@ -321,7 +354,12 @@ router.get('/editEvent/:id', function(req,res,next){
 
 
 router.get('/events', function(req,res,next){
-	Event.find({}, function(err, events) {
+	let paramObj = {}
+	console.log(req.query.search)
+	if (req.query.search){
+		paramObj = {"name" : {$regex :  new RegExp(req.query.search, "i") }}
+	} 
+	Event.find(paramObj, function(err, events) {
 		res.json(events)
   	})
 })

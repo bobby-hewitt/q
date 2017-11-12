@@ -11,7 +11,8 @@ class FileUpload extends Component {
 		super(props)
 		this.state = {
 			label: '',
-			browseLabel: 'Browse'
+			browseLabel: 'Browse',
+			isUploading: false
 		}
 	}
 
@@ -25,6 +26,7 @@ class FileUpload extends Component {
 		}
 
 		$('#falseInput' + self.props.name).click(function(){
+			console.log('clicking')
 			$('#' + self.props.name).click()
 		})
 	}
@@ -60,7 +62,7 @@ class FileUpload extends Component {
 	      if(xhr.status === 200){
 	      	console.log('file uploaded')
 	        self.props.onUploadImage(url, this.state.label)
-	        self.setState({browseLabel: 'Browse', label: ''}, () => {
+	        self.setState({browseLabel: 'Browse', label: '', isUploading: false}, () => {
 	        	console.log(this.state)
 	        })
 	      }
@@ -74,12 +76,13 @@ class FileUpload extends Component {
 
 
 	beginUpload(){
-		console.log('beginning upload')
+			this.setState({isUploading: true})
 		    const files = document.getElementById(this.props.name).files;
 		    const file = files[0];
 		    if(file === null){
 		      return alert('No file selected.');
 		    }
+		    this.setState({browseLabel: files[0].name})
 		    this.getSignedRequest(file);
 	}
 
@@ -89,16 +92,24 @@ class FileUpload extends Component {
 
 	render(){
 		return(
-			<div className="fileUploadContainer">
-				<div className="formFalseFileInput" id={"falseInput" + this.props.name}>
-					{this.state.browseLabel}
-				</div>
-				<TextInput name={'fileInputLabel'} value={this.state.label} placeholder="label" onChange={this.onLabelChange.bind(this)}/>
-				<div className="uploadButton" onClick={this.beginUpload.bind(this)}>
-					
-				</div>
-			  	<input name={this.props.name} id={this.props.name} type="file" className="fileInput" placeholder={this.props.placeholder} />
-			  	<input type="hidden" id="avatar-url" name={this.props.name + 'URL'} value="/images/default.png" />
+			<div>
+				<div className="fileUploadContainer">
+					<div className="formFalseFileInput" id={"falseInput" + this.props.name}>
+						{this.state.browseLabel}
+					</div>
+					<TextInput name={'fileInputLabel'} value={this.state.label} placeholder="label" onChange={this.onLabelChange.bind(this)}/>
+					<div className="uploadButton" onClick={this.beginUpload.bind(this)}>
+						
+					</div>
+					{this.state.isUploading &&
+				  		<div className="fileUploadingContainer">
+					  		<p>File uploading</p>
+					  		<img src="https://media.giphy.com/media/YfZBMdg9l5WHC/giphy.gif" className="fileUploadSpinner"/> 
+				  		</div>
+				  	}
+			  	</div>
+				<input name={this.props.name} id={this.props.name} type="file" className="fileInput" placeholder={this.props.placeholder} />
+				<input type="hidden" id="avatar-url" name={this.props.name + 'URL'} value="/images/default.png" />
 		  	</div>
 		)
 	}

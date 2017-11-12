@@ -3,12 +3,12 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import './style.css'
-import SectionHeader from '../SectionHeader'
-import { getMembers } from '../../../actions/admin'
-import AdminTopLevelPersonRecord from '../../../components/AdminTopLevelPersonRecord'
-import Search from '../Search'
+import SectionHeader from '../../SectionHeader'
+import { getMembers, makeAdmin } from '../../../../actions/admin'
+import AdminTopLevelPersonRecord from '../../../../components/AdminTopLevelPersonRecord'
+import Search from '../../Search'
 
-class Members extends Component {
+class AddAdministrator extends Component {
 
 	componentWillMount(){
 		let payload = {
@@ -19,7 +19,12 @@ class Members extends Component {
 	}
 
 	onMemberClick(id){
-		this.props.getMember(id)
+		let payload = {
+			jwt: this.props.jwt,
+			url: this.props.apiHost,
+			data: id
+		}
+		this.props.makeAdmin(payload)
 	}
 
 	updateMembers(value){
@@ -33,10 +38,11 @@ class Members extends Component {
 	}
 
 
+
 	render(){
 		return(
 			<div>
-				<SectionHeader section="Members" />
+				<SectionHeader section="Add Admin Role"/>
 				<Search onSearch={this.updateMembers.bind(this)} />
 				{this.props.members && this.props.members.map((person, i) => {
 					console.log(person)
@@ -64,12 +70,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 	getMembers,
-	getMember: (id) => push('/admin/member/' + id)
+	makeAdmin,
+	
 }, dispatch)
 
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Members)
+)(AddAdministrator)
 

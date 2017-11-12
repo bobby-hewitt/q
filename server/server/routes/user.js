@@ -11,11 +11,17 @@ let email = require('../email')
 
 /* GET users listing. */
 router.post('/register', function (req, res) {
-  console.log('reqBoy',req.body)
+ 
   let user = {
     email: req.body.email, 
-    avatarUrl: req.body.avatarUrl,
-    name: req.body.name
+    imageUrl: req.body.imageUrl,
+    name: req.body.name,
+    description: req.body.description,
+    country: req.body.country,
+    investmentSectors: req.body.investmentSectors,
+    investmentSize: req.body.investmentSize,
+    jobTitle: req.body.jobTitle,
+    phone: req.body.phone
   }
   User.register(new User(user), req.body.password, function (err, user) {
     if (err) {

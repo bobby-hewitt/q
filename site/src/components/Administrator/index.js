@@ -10,7 +10,7 @@ const Administrator = (props) => (
   <div className="adminTopLevelPersonRecordContainer" >
   	<div className="row">
   		<div className="col-md-1 col-xs-2">
-    		<div style={{backgroundImage: "url('" + props.administrator.avatarUrl + "')"}} className="adminTopLevelPersonRecordImage" />
+    		<div style={{backgroundImage: "url('" + props.administrator.imageUrl + "')"}} className="adminTopLevelPersonRecordImage" />
     	</div>
     	<div className="col-md-11 col-xs-10">
     		<div className="topRowPadding">
@@ -42,9 +42,6 @@ const Administrator = (props) => (
 			    	</div>
 			    </div>
 			</div>
-	    	{props.canRemove &&
-	    		<Button copy="Remove admin rights" />
-	    	}
 	    </div>
   </div>
   </div>
