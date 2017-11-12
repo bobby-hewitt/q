@@ -91,7 +91,6 @@ class AddInvestment extends Component {
 	}
 
 	render(){
-		console.log(this.props)
 		let investment = this.props.investment
 		let title = investment.title
 		let files = investment.files
@@ -126,7 +125,7 @@ class AddInvestment extends Component {
 							<div className="col-md-9">
 								
 								<Section title="Basic details" />
-								<TextInput placeholder="Investment title" value={title} label="password" name="title" onChange={this.onChange.bind(this)}/>
+								<TextInput placeholder="Investment title" value={title} label="Title" name="title" onChange={this.onChange.bind(this)}/>
 								<TextArea formId="createNewInvestmentForm" label="Company description" name="description" value={description} onChange={this.onChange.bind(this)}/>
 								<TextInput value={videoUrl} label="Video URL" name="videoUrl" onChange={this.onChange.bind(this)}/>
 								

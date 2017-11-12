@@ -11,7 +11,8 @@ class ImageUpload extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			imageUrl: 'https://maxcdn.icons8.com/Share/icon/p1em/Users//user1600.png'
+			imageUrl: 'https://maxcdn.icons8.com/Share/icon/p1em/Users//user1600.png',
+			isUploading: false
 		}
 	}
 
@@ -32,6 +33,7 @@ class ImageUpload extends Component {
 		    if(file === null){
 		      return alert('No file selected.');
 		    }
+		    this.setState({isUploading: true})
 		    this.getSignedRequest(file);
 		}
 
@@ -43,22 +45,25 @@ class ImageUpload extends Component {
 
 
 	getSignedRequest(file){
-		console.log(file)
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', `${this.props.apiHost}/upload/signImageUpload?file-name=${this.props.filenamePrefix}&file-type=${file.type}`);
-		xhr.onreadystatechange = () => {
-		if(xhr.readyState === 4){
-		  if(xhr.status === 200){
-		  	console.log(xhr.responseText)
-		    const response = JSON.parse(xhr.responseText);
-		    this.uploadFile(file, response.signedRequest, response.url);
-		  }
-		  else{
-		    alert('Could not get signed URL.');
-		  }
-		}
+		if (file){
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', `${this.props.apiHost}/upload/signImageUpload?file-name=${this.props.filenamePrefix}&file-type=${file.type}`);
+			xhr.onreadystatechange = () => {
+			if(xhr.readyState === 4){
+			  if(xhr.status === 200){
+			  	console.log(xhr.responseText)
+			    const response = JSON.parse(xhr.responseText);
+			    this.uploadFile(file, response.signedRequest, response.url);
+			  }
+			  else{
+			    alert('Could not get signed URL.');
+			  }
+			}
 		};
 		xhr.send();
+		} else {
+			this.setState({isUploading: false})
+		}
 	}
 
 	uploadFile(file, signedRequest, url){
@@ -68,7 +73,7 @@ class ImageUpload extends Component {
 	  xhr.onreadystatechange = () => {
 	    if(xhr.readyState === 4){
 	      if(xhr.status === 200){
-	      	self.setState({imageUrl: url}, () => {
+	      	self.setState({imageUrl: url, isUploading:false}, () => {
 	      		console.log(self.state.imageUrl)
 	      	})
 	        self.props.onUploadImage(url)
@@ -81,12 +86,26 @@ class ImageUpload extends Component {
 	  xhr.send(file);
 	}
 
+	onUploadingClick(){
+		return
+	}
+
 	render(){
 		return(
 			<div>
 				<div className="uploadImageContainer" style={{backgroundImage: "url('" + this.state.imageUrl + "')"}}>
 				</div>
-				<div className="uploadImageButton" id="falseImageInput">Choose Image</div>
+				<div className="uploadImageButton" id="falseImageInput">
+				{!this.state.isUploading &&
+					<p>Choose Image</p>
+				}
+				
+				{this.state.isUploading &&
+					<div className="imageUploadingContainer" onClick={this.onUploadingClick.bind(this)}>
+				  		<img src="https://media.giphy.com/media/YfZBMdg9l5WHC/giphy.gif" className="imageUploadSpinner"/> 
+			  		</div>
+				}
+				</div>
 			  	<input name={this.props.name} id={this.props.name} type="file" className="fileInput" placeholder={this.props.placeholder} />
 			  	<input name={this.props.name} id={this.props.name} type="file" className="fileInput" placeholder={this.props.placeholder} />
 			  	<input type="hidden" name="imageUrl" value={this.state.imageUrl ? this.state.imageUrl : ''} />
