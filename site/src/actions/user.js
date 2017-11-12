@@ -77,10 +77,10 @@ export const setAuthToken = (payload) => {
   }
 }
 
-export const setAvatarUrl = (payload) => {
+export const setImageUrl = (payload) => {
   return(dispatch) => {
     dispatch({
-      type: 'SET_AVATAR_URL',
+      type: 'SET_IMAGE_URL',
       payload: payload
     })
   }

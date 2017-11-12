@@ -110,14 +110,14 @@ function createAdminUser(){
   let users = [
     {
       email: 'bobbystestaddr@gmail.com', 
-      avatarUrl: 'https://q-ventures.s3.amazonaws.com/avatar/4443182179499',
+      imageUrl: 'https://q-ventures.s3.amazonaws.com/avatar/4443182179499',
       name: 'Bobby Hewitt',
       isApproved: true,
       isAdmin: true
     },
     {
       email: 'bobbyhewitt@hotmail.co.uk', 
-      avatarUrl: 'https://q-ventures.s3.amazonaws.com/avatar/4443182179499',
+      imageUrl: 'https://q-ventures.s3.amazonaws.com/avatar/4443182179499',
       name: 'Bobby Hewitt',
       isApproved: true,
       isAdmin: true
