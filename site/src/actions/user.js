@@ -70,6 +70,29 @@ export const logout = (payload) => {
 
 export const setAuthToken = (payload) => {
   return(dispatch) => {
+    console.log(payload)
+     $.ajax({
+          type: "POST", //GET, POST, PUT
+          url: payload.url + '/user/authenticateWithJWT',  //the url to call
+          contentType: "application/json",           
+          headers: {"jwt": payload.jwt},
+      }).done(function (response) {
+            console.log(response)
+            dispatch({
+              type:'SET_USER',
+              payload: response
+            })
+            dispatch({
+              type: 'HIDE_ERROR'
+            })
+            dispatch({
+              type: 'LOGGED_IN',
+              payload: payload.jwt
+            })
+      }).fail(function (err)  {
+        console.log('error authenticating with existing token')
+        console.log(err)
+      });
     dispatch({
       type: 'SET_AUTH_TOKEN',
       payload: payload

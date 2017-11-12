@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Form from '../../../components/Form'
 import TextInput from '../../../components/Form/TextInput'
 import FileUpload from '../../../components/Form/FileUpload'
-
+import TitleSection from '../../../components/TitleSection'
 import './style.css'
 import $ from 'jquery'
 import { login, logout, authenticateWithJWT } from '../../../actions/user'
@@ -35,15 +35,42 @@ class Login extends Component {
 
   render(){
     return(
-      <div className="loginFormContainer">
-      	{this.props.displayError &&
-      		<h3>{this.props.errorMessage}</h3>
-      	}
-        <Form submitText="Submit" onSubmit={this.onSubmit.bind(this)} formId="loginForm">
-          <TextInput placeholder="Email" label="email" name="username"/>
-          <TextInput placeholder="Password" label="password" name="password"/>
+      <div>
+      <div className="container-fluid Home flush">
+        <div className="row">
+          <div className="col-md-6">
+            <TitleSection
+              minHeight={window.innerWidth / 2}
+              vPadding={100}
+              background="#1F3134"
+              color="white"
+            >
+            </TitleSection>
+          </div>
+          <div className="col-md-6 column-flush">
+            <TitleSection
+              minHeight={window.innerWidth / 2}
+              vPadding={100}
+              color="black"
+              background="white"
+             
+              background="white"
+            >
+             <div className="loginFormContainer">
+        {this.props.displayError &&
+          <h3>{this.props.errorMessage}</h3>
+        }
+        <Form submitText="Login" onSubmit={this.onSubmit.bind(this)} formId="loginForm">
+          <TextInput placeholder="Email" label="Email" name="username"/>
+          <TextInput placeholder="Password" label="Password" name="password"/>
+
         </Form>
-        <p onClick={this.props.resetPassword}>Forgotten your password?</p>
+         <p className="loginPasswordReset" onClick={this.props.resetPassword}>Forgotten your password?</p>
+      </div>
+            </TitleSection>
+          </div>
+        </div>
+      </div>
       </div>
     )
   }

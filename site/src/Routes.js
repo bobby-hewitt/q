@@ -14,21 +14,72 @@ import About from './containers/Unauthenticated/About'
 import Contact from './containers/Unauthenticated/Contact'
 import Team from './containers/Unauthenticated/Team'
 import Portfolio from './containers/Unauthenticated/Portfolio'
-import { setAuthToken } from './actions/user'
+import NavBar from './containers/NavBar'
+import Member from './containers/Member'
+import { setAuthToken, authenticateWithJWT } from './actions/user'
+
+let authLinks = [
+  {copy: 'members', path: 'member/members'},
+  {copy: 'noticeboard', path: 'member/noticebaord'},
+  {copy: 'investments', path: 'member/investments'},
+  {copy: 'events', path: 'member/events'},
+  {copy: 'logout', path: 'login'}
+]
+
+let noAuthLinks = [
+{copy: 'home', path: ''},
+  {copy: 'about', path: 'about'},
+  {copy: 'team', path: 'team'},
+  {copy: 'portfolio', path: 'portfolio'},
+  {copy: 'events', path: 'events'},
+  {copy: 'login', path: 'login'}
+]
 
 class Routes extends Component{
+
+  constructor(props){
+    super(props)
+    this.state = {
+      isAuthenticated: false,
+      links: noAuthLinks
+    }
+  }
 
   componentWillMount(){
     if (window.localStorage && window.localStorage.qVenturesAuth){
       console.log('setting auth')
-      this.props.setAuthToken(window.localStorage.qVenturesAuth)
+      let payload = {
+        url: this.props.apiHost,
+        jwt: window.localStorage.qVenturesAuth
+
+      }
+      this.props.setAuthToken(payload)
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log('recieving props')
+    if (nextProps.user && nextProps.user.imageUrl && this.state.isAuthenticated){
+      return
+    }
+    else if (nextProps.user && nextProps.user.imageUrl && !this.state.isAuthenticated){
+      this.setState({isAuthenticated: true, links: authLinks})
+      console.log('should log in')
+    } 
+    else if(this.state.isAuthenticated){
+      console.log('should log out')
+      this.setState({isAuthenticated: false, links: noAuthLinks})
     }
   }
 
   render(){
     return(
      <div>
-        <header>
+
+        <header> 
+          {this.props.location.pathname.indexOf('admin') <= 0 && 
+            <NavBar links={this.state.links}/>
+          }
         </header>
 
         <main>
@@ -44,6 +95,7 @@ class Routes extends Component{
           <Route exact path="/register" component={Register} />
           <Route exact path="/reset/:token" component={ConfirmNewPassword} />
           <Route path="/admin" component={Admin} />
+          <Route path="/member" component={Member} />
         </main>
       </div>
     )
@@ -53,10 +105,19 @@ class Routes extends Component{
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setAuthToken
+  setAuthToken,
+  authenticateWithJWT
 }, dispatch)
 
+const mapStateToProps = state => ({
+  apiHost:state.setup.apiHost,
+  displayError: state.error.showError,
+  user: state.user
+  
+})
+
+
 export default withRouter(connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Routes))

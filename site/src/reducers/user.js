@@ -1,6 +1,6 @@
 
 const initialState = {
-  image: null
+
 }
 
 export default (state = initialState, action) => {
@@ -16,9 +16,14 @@ export default (state = initialState, action) => {
         isAdmin: true
       }
     case 'SET_USER':
+      console.log('setting user', action.payload)
       return {
         ...action.payload
       }
+    case 'LOGOUT':
+    return {
+
+    }
     default:
       return state
   }

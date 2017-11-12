@@ -1,0 +1,30 @@
+.navBarAuthContainer{
+	margin-right:15px;
+	height:70px;
+	min-width: 150px;
+	display: flex;
+	flex-direction: row;
+	border: 1px solid #787878;
+}
+
+
+.navBarAuthContainer h4{
+	width:100%;
+	margin:0;
+	line-height: 70px;
+	padding:0 20px;
+	text-align: center;
+	font-size: 12px;
+    font-weight: 600;
+	letter-spacing: 1.71px;
+	text-transform: uppercase;
+
+}
+
+.navBarAuthImage{
+	background-position: center;
+	background-size: cover;
+	width:100px;
+	height:70px;
+	margin-left:-1px;
+}
