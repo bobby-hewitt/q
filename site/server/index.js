@@ -14,11 +14,12 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const indexRoute = require('./routes/index');
 const publicRoute = require('./routes/public');
+const memberRoute = require('./routes/member');
 const userRoute = require('./routes/user')
 const uploadRoute = require('./routes/upload')
 const bodyParser = require('body-parser')
 const adminRoute = require('./routes/admin')
-require('dotenv').config({path: 'server/.env'})
+require('dotenv').config({path: '.env'})
 const jwtExtractor = require('./helpers/jwtExtractor')
 const aws = require('aws-sdk');
 const authenticateRequest = require('./helpers/authenticateRequest')
@@ -35,8 +36,11 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 app.use(cors())
 app.use('/api/user', userRoute);
+app.use('/api/member', memberRoute);
 app.use('/api/', indexRoute);
 app.use('/api/upload', uploadRoute);
+
+//auth middleware for admin routes
 app.use('/api/admin', function(req,res,next){
   authenticateRequest(req, res, next).then((user) => {
     if (user.isAdmin){
@@ -49,6 +53,24 @@ app.use('/api/admin', function(req,res,next){
     return res.status(401).send({isAdmin: false})
   })
 }, adminRoute)
+
+//auth middleware for member routes
+app.use('/api/member', function(req,res,next){
+  authenticateRequest(req, res, next).then((user) => {
+    console.log(user)
+    if (user.isApproved){
+      next()
+    } else {
+      return res.status(401).send({isAdmin: false})
+    }
+  })
+  .catch(() => {
+    return res.status(401).send({isAdmin: false})
+  })
+}, memberRoute)
+
+
+
 //set up mongo connection
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DB_URL,  {useMongoClient: true});

@@ -9,12 +9,13 @@ var User = new Schema({
 	isApproved: false,
 	imageUrl: '',
 	name: '',
-    description: '',
-    country: '',
-    investmentSectors: [],
-    investmentSize: [],
-    jobTitle: '',
-    phone: ''
+  description: '',
+  country: '',
+  investmentSectors: [],
+  investmentSize: [],
+  jobTitle: '',
+  phone: '',
+  events: []
 });
  
 // See passport-local-mongoose docs for schema customization options

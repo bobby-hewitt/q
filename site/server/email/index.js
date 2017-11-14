@@ -38,7 +38,7 @@ function constructPasswordReset(data, subject){
 			type: 'button',
 			content: {
 				copy: 'This is a button',
-				url: 'http://localhost:3000/reset/' + data.token 
+				url: 'https://q-ventures.herokuapp.com/reset' + data.token 
 			}
 		}, 
 		{
@@ -135,7 +135,7 @@ function constructUserApproved(data, subject){
 			type: 'button',
 			content: {
 				copy: 'Activate my profile',
-				url: 'http://localhost:3000/reset/' + data.token 
+				url: 'https://q-ventures.herokuapp.com/reset' + data.token 
 			}
 		}, 
 		{

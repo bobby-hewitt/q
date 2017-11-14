@@ -266,6 +266,7 @@ router.post('/deleteInvestment', function(req,res,next){
 router.post('/addEvent', function(req,res,next){
 	//event infromation
 	let obj = {
+		imageUrl: req.body.imageUrl,
 		name: req.body.name,
 		date: req.body.date,
 		time: req.body.time,
